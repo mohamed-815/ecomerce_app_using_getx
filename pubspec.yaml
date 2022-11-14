@@ -1,0 +1,105 @@
+name: orands_fish_booking
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.6.0
+  get: ^4.6.5
+  google_fonts: ^3.0.1
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/goldfish-logo-design-template-icon-vector-34041824.jpg
+    - assets/Rectangle 2241.png
+    - assets/chicken-feed-pellets-1200x900.webp
+    - assets/maxresdefault.jpg
+    - assets/Moor_color_change.jpg
+    - assets/141ad8d639fd9bfedc719ec93a3b80ef.jpg
+    - assets/cartoon-aquarium-fish-vector-1132116.jpg
+    - assets/images (1).jpeg
+    - assets/images.jpeg
+    - assets/pet-shop-vet-store-set-domestic-animals-accessories-cat-dog-fish-cartoon-vector-food-toys-aid-bowl-shampoo-aquarium-240357678.jpg
+    - assets/Paypal.png
+    - assets/Group 5.png
+    - assets/51KsY6w0mVL._AC_SS450_.jpg
+    - assets/images (5).jpeg
+    - assets/rohu-fish-seeds-1614678332-5739973.jpeg
+    - assets/31uW-LPkrSL._AC_SY580_.jpg
+    - assets/download.jpeg
+    - assets/AmericanGoldfinch_MattWilliams_4000x2200.jpg
+    - assets/ediblefishes/images.jpeg
+    - assets/ediblefishes/images.jpeg
+    - assets/ediblefishes/phangasius-fish-seeds-for-farming-546.jpg
+    - assets/accessories/400x400.jpeg
+    - assets/accessories/aquarium-air-stone-250x250.jpg
+    - assets/accessories/aquarium-air-stone-500x500.jpg
+    - assets/feeds/download.jpeg
+    - assets/feeds/images.jpeg
+    - assets/feeds/Tetra-Tetramin-Large-Flakes.jpg
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
