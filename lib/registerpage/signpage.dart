@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/home/homescreen.dart';
+import 'package:orands_fish_booking/registerpage/registerpage.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
-
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+  AuthController ac = Get.find();
   @override
   Widget build(BuildContext context) {
     var emailcontroller = TextEditingController();
@@ -34,7 +36,7 @@ class RegisterPage extends StatelessWidget {
               khieght,
               khieght,
               khieght,
-              Textwidgrt(title1: 'Register here'),
+              Textwidgrt(title1: 'Log here'),
               khieght,
               Row(
                 children: [
@@ -65,40 +67,42 @@ class RegisterPage extends StatelessWidget {
                     hint: 'Enter Password',
                     lebel: 'Password'),
               ),
-              khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "Reenter Password"),
-                ],
-              ),
-              khieght,
-              Container(
-                height: shieght / 16,
-                child: TextField1(
-                    controller1: Passwordcontroller2,
-                    hint: 'Reenter Password',
-                    lebel: 'Reenter Password'),
-              ),
+
               khieght,
               khieght,
-              khieght,
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: SizedBox(
                     width: swidth / 1.5, child: Center(child: Text('Submit'))),
                 onPressed: () {
-                  if (Passwordcontroller2.text.trim() ==
-                      Passwordcontroller.text.trim()) {
-                    AuthController.instance.register(
-                        emailcontroller.text.trim(),
-                        Passwordcontroller.text.trim());
-                  } else {
-                    Get.snackbar('Login', 'message',
-                        messageText: Text('Password is Not Matching'));
-                  }
-                  //   Get.to(HomeScreen());
+                  AuthController.instance.login(emailcontroller.text.trim(),
+                      Passwordcontroller.text.trim());
+                  //Get.to(HomeScreen());
                 },
-              )
+              ),
+              Row(
+                children: <Widget>[
+                  const Text('Does not have account?'),
+                  TextButton(
+                    child: const Text(
+                      'Tape Here',
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                    onPressed: () {
+                      Get.to(() => RegisterPage());
+                      //signup screen
+                    },
+                  )
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+
+              SignInButton(Buttons.Google, onPressed: () {
+                ac.googlesign_methode();
+              })
+              //
+              //  Container(width: 100, child: Image.asset('assets/download.png'))
             ],
           ),
         ),

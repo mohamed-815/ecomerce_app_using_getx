@@ -83,7 +83,9 @@ class PageShowList extends StatelessWidget {
             init: FeedController(),
             builder: (c) {
               return ListingItemPage1(
-                  titlelarge: category, itemdtail: c.edibledetail);
+                titlelarge: category,
+                //itemdtail: c.ediblede
+              );
             }));
   }
 }

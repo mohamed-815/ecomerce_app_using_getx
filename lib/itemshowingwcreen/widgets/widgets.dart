@@ -12,11 +12,11 @@ class PcCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        color: Colors.white,
+        color: Color.fromRGBO(23, 22, 22, 1),
         child: Container(
             margin: EdgeInsets.all(10),
-            child: smalltextboldWidjets(
-              Title: '1 ps @ 10 Rs',
+            child: smalltextboldWidjets9(
+              Title: '1 ps @ ${title} Rs',
             )));
   }
 }
@@ -31,20 +31,20 @@ class Pccardadd extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        color: Color.fromARGB(255, 216, 211, 211),
+        color: Color.fromRGBO(23, 22, 22, 1),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(Icons.add, size: 20),
+              //   Icon(Icons.add, size: 20),
               Container(
                   margin: EdgeInsets.all(10),
                   child: Text(
                     title,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   )),
-              Icon(Icons.remove, size: 15),
+              //  Icon(Icons.remove, size: 15),
             ],
           ),
         ));

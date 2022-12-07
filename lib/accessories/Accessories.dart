@@ -8,6 +8,7 @@ import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/home/homescreen.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemshowingcontroller.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
+import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/settings/settung.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
@@ -15,12 +16,16 @@ import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
 class Accessories extends StatelessWidget {
   Accessories({required this.titlelarge, super.key});
   String titlelarge;
+
   @override
   Widget build(BuildContext context) {
     final pages = [
       NewWidget(titlelarge: titlelarge),
       NewWidget(titlelarge: titlelarge),
-      Text('data')
+      NewWidget(
+        titlelarge: titlelarge,
+        product1: showTheList(),
+      ),
     ];
     return GetBuilder<AccessoriesController>(
         init: AccessoriesController(),
@@ -69,12 +74,14 @@ class Accessories extends StatelessWidget {
 }
 
 class NewWidget extends StatelessWidget {
-  const NewWidget({
+  NewWidget({
     Key? key,
+    this.product1,
     required this.titlelarge,
   }) : super(key: key);
 
   final String titlelarge;
+  Stream<List<ModelProduct>>? product1;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +91,7 @@ class NewWidget extends StatelessWidget {
             builder: (c) {
               return ListingItemPage1(
                 titlelarge: titlelarge,
-                itemdtail: c.edibledetail,
+                itemdtail: showTheList(),
               );
             }));
   }

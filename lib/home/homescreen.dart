@@ -27,229 +27,230 @@ class HomeScreen extends StatelessWidget {
       Shieght(context);
     });
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 231, 227, 227),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Card(
-              color: Colors.white.withOpacity(.1),
-              child: Stack(
-                children: [
-                  Container(
+      backgroundColor: Color.fromARGB(255, 231, 227, 227),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Card(
+            color: Colors.white.withOpacity(.1),
+            child: Stack(
+              children: [
+                Container(
+                  height: 300.h,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 87, 138, 177),
+                      borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(100))),
+                ),
+                Positioned(
+                  bottom: 400.h,
+                  child: Container(
                     height: 300.h,
                     decoration: BoxDecoration(
                         color: Color.fromARGB(255, 87, 138, 177),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(100))),
                   ),
-                  Positioned(
-                    bottom: 400.h,
-                    child: Container(
-                      height: 300.h,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 87, 138, 177),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(100))),
+                ),
+                Column(
+                  children: [
+                    ListTile(
+                      leading: GestureDetector(
+                        onTap: (() {
+                          Get.to(() => Settings());
+                        }),
+                        child: const Icon(
+                          Icons.menu,
+                          size: 30,
+                          color: Color.fromARGB(255, 30, 28, 28),
+                        ),
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () => Get.to(() => Search()),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white.withOpacity(.5),
+                          child: const Center(
+                              child: Icon(
+                            Icons.search,
+                            color: Color.fromARGB(255, 36, 35, 35),
+                            size: 18,
+                          )),
+                        ),
+                      ),
                     ),
-                  ),
-                  Column(
-                    children: [
-                      ListTile(
-                        leading: GestureDetector(
-                          onTap: (() {
-                            Get.to(() => Settings());
-                          }),
-                          child: const Icon(
-                            Icons.menu,
-                            size: 30,
-                            color: Color.fromARGB(255, 30, 28, 28),
-                          ),
-                        ),
-                        trailing: GestureDetector(
-                          onTap: () => Get.to(() => Search()),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white.withOpacity(.5),
-                            child: const Center(
-                                child: Icon(
-                              Icons.search,
-                              color: Color.fromARGB(255, 36, 35, 35),
-                              size: 18,
-                            )),
-                          ),
-                        ),
-                      ),
-                      khieght,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Textwidgrt(
-                                  title1: "Offers in aquarium",
-                                ),
-                                GestureDetector(
-                                  onTap: () => Get.to(CartPage()),
-                                  child: CircleAvatar(
-                                    child: Icon(Icons.shopping_basket),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Container(
-                              height: shieght / 5.5,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  // shrinkWrap: true,
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
-                                    return OfferContainer(
-                                      image: 'assets/Moor_color_change.jpg',
-                                      itemname: 'Gold fish',
-                                      itemprice: '5rs',
-                                      shieght: shieght,
-                                      swidth: swidth,
-                                      title1: 'min 100ps',
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              children: [
-                                Textwidgrt(title1: "Offers in birds"),
-                              ],
-                            ),
-                            Container(
-                              height: Shieght(context) / 5.5,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  // shrinkWrap: true,
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
-                                    return OfferContainer(
-                                      image: 'assets/maxresdefault.jpg',
-                                      itemname: 'Love birds',
-                                      itemprice: '200rs',
-                                      shieght: shieght,
-                                      swidth: swidth,
-                                      title1: 'min 10ps',
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              children: [
-                                Textwidgrt(title1: "Offers in feeds"),
-                              ],
-                            ),
-                            Container(
-                              height: shieght / 5.5,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  // shrinkWrap: true,
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
-                                    return OfferContainer(
-                                      image:
-                                          'assets/chicken-feed-pellets-1200x900.webp',
-                                      itemname: 'poultry feed',
-                                      itemprice: '20rs',
-                                      shieght: shieght,
-                                      swidth: swidth,
-                                      title1: 'min 10Kg',
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              children: [
-                                Textwidgrt(
-                                  title1: "Items",
-                                ),
-                              ],
-                            ),
-                            khieght,
-                            Container(
-                              height: shieght / 1.4,
-                              child: GridView.count(
-                                physics: NeverScrollableScrollPhysics(),
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 35.0,
-                                mainAxisSpacing: 3,
-                                children: List.generate(5, (index) {
-                                  if (index == 0) {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => EdibleSeeds(
-                                            category: 'Edible Fishes',
-                                          )),
-                                      child: CategoryContainer(
-                                          image:
-                                              'assets/141ad8d639fd9bfedc719ec93a3b80ef.jpg',
-                                          categoryname: 'Edible Fishes',
-                                          shieght: shieght,
-                                          swidth: swidth),
-                                    );
-                                  }
-                                  if (index == 1) {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => AquariumFishes(
-                                            category: 'Aquarium',
-                                          )),
-                                      child: CategoryContainer(
-                                          image:
-                                              'assets/cartoon-aquarium-fish-vector-1132116.jpg',
-                                          categoryname: 'Aquarium',
-                                          shieght: shieght,
-                                          swidth: swidth),
-                                    );
-                                  }
-                                  if (index == 2) {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => Accessories(
-                                            titlelarge: 'Accessories',
-                                          )),
-                                      child: CategoryContainer(
-                                          image:
-                                              'assets/pet-shop-vet-store-set-domestic-animals-accessories-cat-dog-fish-cartoon-vector-food-toys-aid-bowl-shampoo-aquarium-240357678.jpg',
-                                          categoryname: 'Accessories',
-                                          shieght: shieght,
-                                          swidth: swidth),
-                                    );
-                                  }
-
-                                  if (index == 3) {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => Feeds(
-                                            category: 'Feeds',
-                                          )),
-                                      child: CategoryContainer(
-                                          image: 'assets/images.jpeg',
-                                          categoryname: 'feeds',
-                                          shieght: shieght,
-                                          swidth: swidth),
-                                    );
-                                  } else {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => Birds(
-                                            titlelarge: 'birds',
-                                          )),
-                                      child: CategoryContainer(
-                                          image: 'assets/images (1).jpeg',
-                                          categoryname: 'Birds',
-                                          shieght: shieght,
-                                          swidth: swidth),
-                                    );
-                                  }
-                                }),
+                    khieght,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Textwidgrt(
+                                title1: "Offers in aquarium",
                               ),
-                            )
-                          ],
-                        ),
+                              GestureDetector(
+                                onTap: () => Get.to(CartPage()),
+                                child: CircleAvatar(
+                                  child: Icon(Icons.shopping_basket),
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            height: shieght / 5.5,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                // shrinkWrap: true,
+                                itemCount: 3,
+                                itemBuilder: (context, index) {
+                                  return OfferContainer(
+                                    image: 'assets/Moor_color_change.jpg',
+                                    itemname: 'Gold fish',
+                                    itemprice: '5rs',
+                                    shieght: shieght,
+                                    swidth: swidth,
+                                    title1: 'min 100ps',
+                                  );
+                                }),
+                          ),
+                          Row(
+                            children: [
+                              Textwidgrt(title1: "Offers in birds"),
+                            ],
+                          ),
+                          Container(
+                            height: Shieght(context) / 5.5,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                // shrinkWrap: true,
+                                itemCount: 3,
+                                itemBuilder: (context, index) {
+                                  return OfferContainer(
+                                    image: 'assets/maxresdefault.jpg',
+                                    itemname: 'Love birds',
+                                    itemprice: '200rs',
+                                    shieght: shieght,
+                                    swidth: swidth,
+                                    title1: 'min 10ps',
+                                  );
+                                }),
+                          ),
+                          Row(
+                            children: [
+                              Textwidgrt(title1: "Offers in feeds"),
+                            ],
+                          ),
+                          Container(
+                            height: shieght / 5.5,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                // shrinkWrap: true,
+                                itemCount: 3,
+                                itemBuilder: (context, index) {
+                                  return OfferContainer(
+                                    image:
+                                        'assets/chicken-feed-pellets-1200x900.webp',
+                                    itemname: 'poultry feed',
+                                    itemprice: '20rs',
+                                    shieght: shieght,
+                                    swidth: swidth,
+                                    title1: 'min 10Kg',
+                                  );
+                                }),
+                          ),
+                          Row(
+                            children: [
+                              Textwidgrt(
+                                title1: "Items",
+                              ),
+                            ],
+                          ),
+                          khieght,
+                          Container(
+                            height: shieght / 1.6,
+                            child: GridView.count(
+                              physics: NeverScrollableScrollPhysics(),
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 35.0,
+                              mainAxisSpacing: 3,
+                              children: List.generate(5, (index) {
+                                if (index == 0) {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(() => EdibleSeeds(
+                                          category: 'Edible Fishes',
+                                        )),
+                                    child: CategoryContainer(
+                                        image:
+                                            'assets/141ad8d639fd9bfedc719ec93a3b80ef.jpg',
+                                        categoryname: 'Edible Fishes',
+                                        shieght: shieght,
+                                        swidth: swidth),
+                                  );
+                                }
+                                if (index == 1) {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(() => AquariumFishes(
+                                          category: 'Aquarium',
+                                        )),
+                                    child: CategoryContainer(
+                                        image:
+                                            'assets/cartoon-aquarium-fish-vector-1132116.jpg',
+                                        categoryname: 'Aquarium',
+                                        shieght: shieght,
+                                        swidth: swidth),
+                                  );
+                                }
+                                if (index == 2) {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(() => Accessories(
+                                          titlelarge: 'Accessories',
+                                        )),
+                                    child: CategoryContainer(
+                                        image:
+                                            'assets/pet-shop-vet-store-set-domestic-animals-accessories-cat-dog-fish-cartoon-vector-food-toys-aid-bowl-shampoo-aquarium-240357678.jpg',
+                                        categoryname: 'Accessories',
+                                        shieght: shieght,
+                                        swidth: swidth),
+                                  );
+                                }
+
+                                if (index == 3) {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(() => Feeds(
+                                          category: 'Feeds',
+                                        )),
+                                    child: CategoryContainer(
+                                        image: 'assets/images.jpeg',
+                                        categoryname: 'feeds',
+                                        shieght: shieght,
+                                        swidth: swidth),
+                                  );
+                                } else {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(() => Birds(
+                                          titlelarge: 'birds',
+                                        )),
+                                    child: CategoryContainer(
+                                        image: 'assets/images (1).jpeg',
+                                        categoryname: 'Birds',
+                                        shieght: shieght,
+                                        swidth: swidth),
+                                  );
+                                }
+                              }),
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 

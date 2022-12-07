@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/cart/bookinglocation.dart';
 import 'package:orands_fish_booking/const/const.dart';
+import 'package:orands_fish_booking/orderpage.dart';
 import 'package:orands_fish_booking/settings/changepassword.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
@@ -33,39 +35,87 @@ class Settings extends StatelessWidget {
         child: Column(children: [
           khieght,
           Row(
+            // mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              kwidth,
-              kwidth,
-              Icon(
-                Icons.settings,
-                size: 40,
+              Row(
+                children: [
+                  kwidth,
+                  kwidth,
+                  Icon(
+                    Icons.settings,
+                    size: 40,
+                  ),
+                  kwidth,
+                  SettingText(
+                    title1: 'Settings',
+                  )
+                ],
               ),
-              kwidth,
-              SettingText(
-                title1: 'Settings',
-              )
+              GestureDetector(
+                onTap: () {
+                  AuthController.instance.googlesignout();
+                  AuthController.instance.logOut();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.logout_outlined,
+                        color: Colors.black,
+                      ),
+                      Text(
+                        'Sign Out',
+                        style: TextStyle(fontSize: 12),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
           khieght,
           khieght,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              kwidth,
-              kwidth,
-              kwidth,
-              kwidth,
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/Moor_color_change.jpg'),
-                // child: Image.asset(
-                //   'assets/Moor_color_change.jpg',
-                //   fit: BoxFit.cover,
-                // ),
+              Row(
+                children: [
+                  kwidth,
+                  kwidth,
+                  kwidth,
+                  kwidth,
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/Moor_color_change.jpg'),
+                    // child: Image.asset(
+                    //   'assets/Moor_color_change.jpg',
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  kwidth,
+                  Text(
+                    'naveen',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                  ),
+                ],
               ),
-              kwidth,
-              Text(
-                'naveen',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
-              )
+              GestureDetector(
+                onTap: () {
+                  Get.to(Order());
+                },
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        Icon(Icons.indeterminate_check_box_sharp),
+                        Text('orders')
+                      ],
+                    ),
+                    kwidth
+                  ],
+                ),
+              ),
             ],
           ),
           khieght,
@@ -169,6 +219,21 @@ class GreyText extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(color: Colors.grey),
+    );
+  }
+}
+
+class GreyText1 extends StatelessWidget {
+  GreyText1({
+    required this.title,
+    Key? key,
+  }) : super(key: key);
+  String title;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(color: Color.fromARGB(255, 223, 220, 220)),
     );
   }
 }

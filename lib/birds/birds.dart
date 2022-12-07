@@ -82,7 +82,7 @@ class DifferentSizeItems extends StatelessWidget {
         builder: (c) {
           return ListingItemPage1(
             titlelarge: titlelarge,
-            itemdtail: c.birddetail,
+            //  itemdtail: c.birddetail,
           );
         });
   }

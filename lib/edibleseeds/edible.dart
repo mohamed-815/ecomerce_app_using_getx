@@ -80,7 +80,10 @@ class PageView1 extends StatelessWidget {
             init: EdibleController(),
             builder: (c) {
               return ListingItemPage1(
-                  titlelarge: category, itemdtail: c.edibledetail);
+                titlelarge: category,
+
+                //itemdtail: c.edibledetail
+              );
             }));
   }
 }

@@ -5,17 +5,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/birds/birdscontroller.dart';
 import 'package:orands_fish_booking/cart/cart.dart';
+import 'package:orands_fish_booking/cart/cartmodel.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/edibleseeds/edible.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/ItemshowingController.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/widgets/widgets.dart';
+import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/settings/settung.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 
 class ItemShowingScreen extends StatelessWidget {
-  ItemShowingScreen({this.itemdetail, super.key});
-  ItemDetail? itemdetail;
+  ItemShowingScreen({required this.itemdetail, super.key});
+  ModelProduct itemdetail;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,26 +28,37 @@ class ItemShowingScreen extends StatelessWidget {
             return SafeArea(
               child: Stack(
                 children: [
+                  Image.network(
+                    "https://images.pexels.com/photos/3133396/pexels-photo-3133396.jpeg?cs=srgb&dl=pexels-valeriia-miller-3133396.jpg&fm=jpg",
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    color: Colors.black.withOpacity(.9),
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                  ),
                   ListView(
                     children: [
                       Container(
-                        height: 200.h,
+                        height: 250.h,
                         child: PageView.builder(
                             onPageChanged: (index) {
                               c.itemChanging(index);
                             },
                             itemCount: itemdetail == null
                                 ? c.images.length
-                                : itemdetail!.images1.length,
+                                : itemdetail.imagelist!.length,
                             itemBuilder: (context, index) {
                               // currentindex = index;
 
                               return Container(
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: AssetImage(itemdetail == null
+                                      image: NetworkImage(itemdetail == null
                                           ? c.images[index]
-                                          : itemdetail!.images1[index]),
+                                          : itemdetail.imagelist![index]),
                                       fit: BoxFit.cover,
                                     ),
                                     borderRadius: BorderRadius.only(
@@ -63,7 +76,7 @@ class ItemShowingScreen extends StatelessWidget {
                             ...List.generate(
                                 itemdetail == null
                                     ? c.images.length
-                                    : itemdetail!.images1.length,
+                                    : itemdetail.imagelist!.length,
                                 (
                                   index,
                                 ) =>
@@ -76,13 +89,12 @@ class ItemShowingScreen extends StatelessWidget {
                                         color: c.currentindex == index
                                             ? Color.fromARGB(255, 8, 41, 69)
                                             : Colors.grey,
-                                        width: c.currentindex == index ? 6 : 12,
+                                        width: c.currentindex == index ? 6 : 6,
                                       ),
                                     ))
                           ],
                         ),
                       ),
-                      khieght,
                       khieght,
                       khieght,
                       Padding(
@@ -92,15 +104,15 @@ class ItemShowingScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                TextOnly25(
+                                TextOnly5(
                                   title1: itemdetail == null
-                                      ? 'Goldfish'
-                                      : itemdetail!.title1,
+                                      ? 'oops'
+                                      : ' ${itemdetail.name}',
                                 ),
                                 PcCard(
                                     title: itemdetail == null
-                                        ? '1 pc  10Rs'
-                                        : itemdetail!.title2),
+                                        ? 'oops'
+                                        : itemdetail.price.toString()),
                               ],
                             ),
                             khieght,
@@ -111,16 +123,12 @@ class ItemShowingScreen extends StatelessWidget {
                                 Pccardadd(
                                     title: itemdetail == null
                                         ? '100'
-                                        : itemdetail!.title3),
+                                        : 'min ${itemdetail.minno.toString()} ps'),
                                 CardAddCart(
                                   title: "add to cart",
                                 ),
                               ],
                             ),
-                            khieght,
-                            khieght,
-                            khieght,
-                            khieght,
                             khieght,
                             khieght,
                             khieght,
@@ -130,7 +138,8 @@ class ItemShowingScreen extends StatelessWidget {
                                   title: 'Description',
                                 ),
                                 Text(
-                                  "min 100 pc,\nOnly .2 inche size is available,\nseeds must be contitioned before puting in to the pond",
+                                  itemdetail.description,
+                                  //  "min 100 pc,\nOnly .2 inche size is available,\nseeds must be contitioned before puting in to the pond",
                                   style: TextStyle(color: Colors.grey),
                                 )
                               ],
@@ -152,11 +161,18 @@ class ItemShowingScreen extends StatelessWidget {
                   Positioned(
                     top: 15,
                     right: 15,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white.withOpacity(.3),
-                      child: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.black.withOpacity(.7),
+                    child: GestureDetector(
+                      onTap: () {
+                        addingToCart(itemdetail);
+                        Get.snackbar('Cart', 'Added to cart');
+                        Get.to(CartPage());
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white.withOpacity(.3),
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.black.withOpacity(.7),
+                        ),
                       ),
                     ),
                   ),

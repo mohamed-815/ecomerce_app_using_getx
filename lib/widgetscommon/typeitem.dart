@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:orands_fish_booking/cart/cart.dart';
+import 'package:orands_fish_booking/cart/cartmodel.dart';
 import 'package:orands_fish_booking/const/const.dart';
+import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/settings/settung.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 
 class TypeItem1 extends StatelessWidget {
   TypeItem1({
+    required this.itemdetail,
     required this.title1,
     required this.title2,
     required this.image,
@@ -17,11 +22,11 @@ class TypeItem1 extends StatelessWidget {
 
   final double shieght;
   final double swidth;
-
-  String itemname;
-  String title1;
-  String title2;
-  String image;
+  ModelProduct itemdetail;
+  String? itemname;
+  String? title1;
+  String? title2;
+  String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class TypeItem1 extends StatelessWidget {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(7),
                     image: DecorationImage(
-                        image: AssetImage(image), fit: BoxFit.cover)),
+                        image: NetworkImage(image!), fit: BoxFit.cover)),
                 height: shieght / 7,
                 width: swidth / 1.5,
 
@@ -54,13 +59,13 @@ class TypeItem1 extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        smalltextboldWidjets25(Title: itemname),
+                        smalltextboldWidjets25(Title: itemname!),
                       ],
                     ),
                     Row(
                       children: [
                         Text(
-                          title1,
+                          '${title1!} rs',
                           style: TextStyle(color: Colors.white),
                         )
                       ],
@@ -68,7 +73,7 @@ class TypeItem1 extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          title2,
+                          'min ${title2!} ps',
                           style: TextStyle(color: Colors.white),
                         )
                       ],
@@ -82,13 +87,20 @@ class TypeItem1 extends StatelessWidget {
         Positioned(
           top: 12,
           right: 16,
-          child: CircleAvatar(
-            radius: 15,
-            backgroundColor: Colors.white.withOpacity(.3),
-            child: Icon(
-              Icons.shopping_cart,
-              size: 18,
-              color: Colors.black.withOpacity(.7),
+          child: GestureDetector(
+            onTap: () {
+              addingToCart(itemdetail);
+              Get.snackbar('Cart', 'Added to cart');
+              Get.to(CartPage());
+            },
+            child: CircleAvatar(
+              radius: 15,
+              backgroundColor: Colors.white.withOpacity(.3),
+              child: Icon(
+                Icons.shopping_cart,
+                size: 18,
+                color: Colors.black.withOpacity(.7),
+              ),
             ),
           ),
         ),

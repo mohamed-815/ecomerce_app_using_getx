@@ -5,16 +5,17 @@ import 'package:orands_fish_booking/aquariumfishes/aquariumcontroller.dart';
 import 'package:orands_fish_booking/aquariumfishes/aquariumfishes.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
+import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/TypeItem.dart';
 
 class ListingItemPage1 extends StatelessWidget {
   ListingItemPage1({
     required this.titlelarge,
-    required this.itemdtail,
+    this.itemdtail,
     Key? key,
   }) : super(key: key);
-  ItemDetail itemdtail;
+  Stream<List<ModelProduct>>? itemdtail;
   String titlelarge;
 
   @override
@@ -36,16 +37,7 @@ class ListingItemPage1 extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () => Get.back(),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white.withOpacity(.3),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                  backbutton1(),
                   GestureDetector(
                     child: CircleAvatar(
                       backgroundColor: Colors.white.withOpacity(.3),
@@ -78,41 +70,152 @@ class ListingItemPage1 extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: GridView.count(
-                  // shrinkWrap: true,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 6,
-                  crossAxisSpacing: 30,
-                  childAspectRatio: 1 / 1.2,
-                  children: List.generate(15, (index) {
-                    //final movie = state.searchResultList[index];
-                    return GestureDetector(
-                      onTap: () => Get.to(() => ItemShowingScreen(
-                            itemdetail: itemdtail,
-                          )),
-                      child: Card(
-                        //elevation: 12,
-                        color: Color.fromARGB(255, 115, 160, 197),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        child: TypeItem1(
-                            image: itemdtail.images1[1],
-                            itemname: itemdtail.title1,
-                            title1: itemdtail.title2,
-                            title2: itemdtail.title3,
-                            shieght: 700.h,
-                            swidth: 200.w),
-                      ),
+            StreamBuilder(
+                stream: showTheList(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('some thing went wrong');
+                  }
+
+                  if (snapshot.hasData) {
+                    final showingitems = snapshot.data!;
+                    return Expanded(
+                      child: GridView.count(
+
+                          // shrinkWrap: true,
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 6,
+                          crossAxisSpacing: 30,
+                          childAspectRatio: 1 / 1.2,
+                          children: List.generate(showingitems.length, (index) {
+                            //final movie = state.searchResultList[index];
+                            return GestureDetector(
+                              onTap: () => Get.to(() => ItemShowingScreen(
+                                    itemdetail: showingitems[index],
+                                  )),
+                              child: Card(
+                                //elevation: 12,
+                                color: Color.fromARGB(255, 115, 160, 197),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TypeItem1(
+                                    itemdetail: showingitems[index],
+                                    image: showingitems[index].imagelist![0],
+                                    itemname: showingitems[index].name,
+                                    title1:
+                                        showingitems[index].price.toString(),
+                                    title2:
+                                        showingitems[index].minno.toString(),
+                                    shieght: 700.h,
+                                    swidth: 200.w),
+                              ),
+                            );
+                            //  MainCard(
+                            //   imageUrl: '$imageAppendUrl${movie.posterPath}',
+                            // );
+                          })),
                     );
-                    //  MainCard(
-                    //   imageUrl: '$imageAppendUrl${movie.posterPath}',
+
+                    // ListView(
+                    //   children: showingitems
+                    //       .map((e) => MyWidget(
+                    //             item: e,
+                    //             id: e.id,
+                    //           ))
+                    //       .toList(),
                     // );
-                  })),
-            )
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  // ListView.builder(
+                  //     itemCount: products.length,
+                  //     itemBuilder: (context, index) {
+                  //       final item = products[index];
+                  //       return MyWidget(item: item);
+                  //     }
+
+                  //     //  MyWidget(item: products)
+
+                  //     )
+                }),
+            // Expanded(
+            //   child: GridView.count(
+            //       // shrinkWrap: true,
+            //       crossAxisCount: 2,
+            //       mainAxisSpacing: 6,
+            //       crossAxisSpacing: 30,
+            //       childAspectRatio: 1 / 1.2,
+            //       children: List.generate(15, (index) {
+            //         //final movie = state.searchResultList[index];
+            //         return GestureDetector(
+            //           onTap: () => Get.to(() => ItemShowingScreen(
+            //                 itemdetail: itemdtail,
+            //               )),
+            //           child: Card(
+            //             //elevation: 12,
+            //             color: Color.fromARGB(255, 115, 160, 197),
+            //             shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.circular(20)),
+            //             child: TypeItem1(
+            //                 image: itemdtail?.imagelist![0],
+            //                 itemname: itemdtail?.name,
+            //                 title1: itemdtail?.minno,
+            //                 title2: itemdtail?.description,
+            //                 shieght: 700.h,
+            //                 swidth: 200.w),
+            //           ),
+            //         );
+            //         //  MainCard(
+            //         //   imageUrl: '$imageAppendUrl${movie.posterPath}',
+            //         // );
+            //       })),
+            // )
           ],
         ),
       ],
     ));
+  }
+}
+
+class backbutton1 extends StatelessWidget {
+  const backbutton1({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Get.back(),
+      child: CircleAvatar(
+        backgroundColor: Colors.white.withOpacity(.3),
+        child: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
+class backbutton2 extends StatelessWidget {
+  const backbutton2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Get.back(),
+      child: CircleAvatar(
+        backgroundColor: Colors.white.withOpacity(.1),
+        child: Icon(
+          Icons.arrow_back,
+          color: Color.fromARGB(255, 208, 205, 205),
+        ),
+      ),
+    );
   }
 }

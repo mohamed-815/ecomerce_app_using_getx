@@ -84,7 +84,10 @@ class ShowingSizePages extends StatelessWidget {
         init: AquariumController(),
         builder: (c) {
           return ListingItemPage1(
-              titlelarge: category, itemdtail: c.edibledetail);
+            titlelarge: category,
+
+            //   itemdtail: c.edibledetail
+          );
         });
   }
 }
@@ -143,32 +146,38 @@ class ListingItemPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 1 / 1.4,
-                        children: List.generate(15, (index) {
-                          //final movie = state.searchResultList[index];
-                          return GestureDetector(
-                            onTap: () => Get.to(() => ItemShowingScreen(
-                                  itemdetail: c.edibledetail,
-                                )),
-                            child: TypeItem1(
-                                title1: c.edibledetail.title1,
-                                title2: c.edibledetail.title2,
-                                image: c.edibledetail.images1[1],
-                                itemname: 'GoldFish',
-                                shieght: 800.h,
-                                swidth: 200.w),
-                          );
-                          //  MainCard(
-                          //   imageUrl: '$imageAppendUrl${movie.posterPath}',
-                          // );
-                        })),
-                  )
+                  // Expanded(
+                  //   child: GridView.count(
+                  //       shrinkWrap: true,
+                  //       crossAxisCount: 2,
+                  //       mainAxisSpacing: 10,
+                  //       crossAxisSpacing: 10,
+                  //       childAspectRatio: 1 / 1.4,
+                  //       children: List.generate(15, (index) {
+                  //         //final movie = state.searchResultList[index];
+                  //         return
+
+                  //             // GestureDetector(
+                  //             //   onTap: () => Get.to(() => ItemShowingScreen(
+                  //             //         //itemdetail: c.edibledetail,
+                  //             //       )),
+                  //             // child:
+
+                  //             TypeItem1(
+                  //                 itemdetail: ,
+                  //                 title1: c.edibledetail.title1,
+                  //                 title2: c.edibledetail.title2,
+                  //                 image: c.edibledetail.images1[1],
+                  //                 itemname: 'GoldFish',
+                  //                 shieght: 800.h,
+                  //                 swidth: 200.w);
+
+                  //         // );
+                  //         //  MainCard(
+                  //         //   imageUrl: '$imageAppendUrl${movie.posterPath}',
+                  //         // );
+                  //       })),
+                  // )
                 ],
               );
             }));

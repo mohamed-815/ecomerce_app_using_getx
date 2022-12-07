@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:orands_fish_booking/home/homescreen.dart';
 import 'package:orands_fish_booking/registerpage/registerpage.dart';
+import 'package:orands_fish_booking/registerpage/signpage.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -31,9 +33,6 @@ class SplashScreen extends StatelessWidget {
 
 Future<dynamic> goToScreen(context) async {
   await Future.delayed(const Duration(seconds: 2));
-  Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const RegisterPage(),
-      ));
+
+  Get.offAll(() => LoginPage());
 }

@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/splash/splash.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp().then(
+    (value) => Get.put(AuthController()),
+  );
   runApp(const MyApp());
 }
 
