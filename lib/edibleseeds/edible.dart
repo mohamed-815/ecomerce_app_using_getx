@@ -16,9 +16,21 @@ class EdibleSeeds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      PageView1(category: category),
-      PageView1(category: category),
-      PageView1(category: category)
+      ListingItemPage1(
+        titlelarge: category,
+
+        //itemdtail: c.edibledetail
+      ),
+      ListingItemPage1(
+        titlelarge: category,
+
+        //itemdtail: c.edibledetail
+      ),
+      ListingItemPage1(
+        titlelarge: category,
+
+        //itemdtail: c.edibledetail
+      )
     ];
     return GetBuilder<EdibleController>(
         init: EdibleController(),

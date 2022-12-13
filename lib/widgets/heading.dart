@@ -111,6 +111,22 @@ class smalltextboldWidjets extends StatelessWidget {
   }
 }
 
+class smalltextboldWidjetswhite extends StatelessWidget {
+  smalltextboldWidjetswhite({
+    required this.Title,
+    Key? key,
+  }) : super(key: key);
+  String Title;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      Title,
+      style: TextStyle(
+          fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+    );
+  }
+}
+
 class smalltextboldWidjets9 extends StatelessWidget {
   smalltextboldWidjets9({
     required this.Title,

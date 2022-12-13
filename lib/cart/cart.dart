@@ -13,11 +13,12 @@ import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
 import 'package:orands_fish_booking/settings/settung.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 
+List<CartModel>? cartlist = [];
 final CartController ca = Get.put(CartController());
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
-
+  CartPage({super.key});
+  double mosttotal = 0;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -56,13 +57,13 @@ class CartPage extends StatelessWidget {
                             StreamBuilder(
                                 stream: showTheCartList(),
                                 builder: (context, snapshot) {
-                                  final list = snapshot.data;
+                                  cartlist = snapshot.data;
                                   return Card(
                                     color: Colors.white.withOpacity(.2),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: GreyText1(
-                                          title: '${list?.length} Items'),
+                                          title: '${cartlist?.length} Items'),
                                     ),
                                   );
                                 })
@@ -167,12 +168,17 @@ class CartPage extends StatelessWidget {
                                                 stream: showTotal(),
                                                 builder: (context, snapshot) {
                                                   final total = snapshot.data;
+                                                  // final temp =
+                                                  //     double.parse(total);
+                                                  // mosttotal = temp;
+
                                                   if (total == null) {}
                                                   return NumberCard1(
                                                       title: total != null
-                                                          ? " ${total.toString()}rs"
+                                                          ? "${total.toString()}rs"
                                                           : '');
                                                 })
+
                                         // GetBuilder<CartController>(
                                         //     init: CartController(),
                                         //     builder: (c) {
@@ -181,15 +187,25 @@ class CartPage extends StatelessWidget {
 
                                         //  ),
                                         ),
-                                    GestureDetector(
-                                      onTap: () =>
-                                          Get.to(() => placeOrderhere()),
-                                      child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8),
-                                          child:
-                                              NumberCard1(title: 'Checkout')),
-                                    ),
+                                    StreamBuilder(
+                                        stream: showTotal(),
+                                        builder: (context, snapshot) {
+                                          final total = snapshot.data;
+                                          return GestureDetector(
+                                            onTap: () =>
+                                                Get.to(() => placeOrderhere(
+                                                      total: total != null
+                                                          ? total
+                                                          : 0,
+                                                    )),
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
+                                                child: NumberCard1(
+                                                    title: 'Checkout')),
+                                          );
+                                        }),
                                   ],
                                 ),
                               ),
@@ -395,6 +411,8 @@ Stream<List<CartModel>> showTheCartList() {
       .collection('collection')
       .doc('users')
       .collection(email!)
+      .doc('userdetails')
+      .collection('cartlist')
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => CartModel.fromJson(doc.data())).toList());
@@ -407,6 +425,8 @@ Addingmore(String id, CartModel itemdetail) async {
       .collection('collection')
       .doc('users')
       .collection(email!)
+      .doc('userdetails')
+      .collection('cartlist')
       .doc(id);
 
   await fireinstance.update({
@@ -426,6 +446,8 @@ RemoveThings(String id, CartModel itemdetail) async {
       .collection('collection')
       .doc('users')
       .collection(email!)
+      .doc('userdetails')
+      .collection('cartlist')
       .doc(id);
 
   await fireinstance.update({
@@ -441,6 +463,8 @@ deleteItem(id) async {
       .collection('collection')
       .doc('users')
       .collection(email!)
+      .doc('userdetails')
+      .collection('cartlist')
       .doc(id);
 
   await fireinstance.delete();

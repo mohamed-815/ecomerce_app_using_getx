@@ -23,11 +23,14 @@ class AuthController extends GetxController {
     _user = Rx<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
     ever(_user, _initialScreen);
+    print('ddd');
     print(email);
   }
 
   _initialScreen(User? user) async {
+    print(user);
     if (user == null) {
+      print('hello');
       await Get.offAll(() => LoginPage());
     } else {
       await Get.offAll(() => const HomeScreen());

@@ -34,5 +34,5 @@ class SplashScreen extends StatelessWidget {
 Future<dynamic> goToScreen(context) async {
   await Future.delayed(const Duration(seconds: 2));
 
-  Get.offAll(() => LoginPage());
+  //Get.offAll(() => LoginPage());
 }

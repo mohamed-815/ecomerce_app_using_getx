@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/aquariumfishes/aquariumcontroller.dart';
 import 'package:orands_fish_booking/aquariumfishes/aquariumfishes.dart';
+import 'package:orands_fish_booking/cart/placeordercontroller.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
 import 'package:orands_fish_booking/model/model.dart';
@@ -188,9 +189,13 @@ class backbutton1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.back(),
+      onTap: () {
+        placeordercontroller.basevaleu.value = 1;
+        print(placeordercontroller.basevaleu.value.toString());
+        Get.back();
+      },
       child: CircleAvatar(
-        backgroundColor: Colors.white.withOpacity(.3),
+        backgroundColor: Colors.white.withOpacity(.5),
         child: Icon(
           Icons.arrow_back,
           color: Colors.black,

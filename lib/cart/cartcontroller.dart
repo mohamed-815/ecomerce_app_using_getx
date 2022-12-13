@@ -18,19 +18,19 @@ class CartController extends GetxController {
         .collection('total')
         .doc('total1');
 
-    fireinstance.set({'total': total.toString()});
+    fireinstance.set({'total': total});
   }
 }
 
-Stream<String> showTotal() {
+Stream<double> showTotal() {
   return FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
       .collection('total')
       .snapshots()
       .map((snapshot) => snapshot.docs
-          .map((doc) => doc.data()['total'].toString())
-          .toString());
+          .map((doc) => double.parse(doc.data()['total'].toString()))
+          .single);
 
   // .map((snapshot) =>
   //     snapshot.docs.map((doc) => CartModel.fromJson(doc.data())).toList();
