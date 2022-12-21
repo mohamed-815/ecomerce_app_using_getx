@@ -1,22 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/utils.dart';
 import 'package:orands_fish_booking/accessories/Accessories.dart';
-import 'package:orands_fish_booking/aquariumfishes/aquariumfishes.dart';
-import 'package:orands_fish_booking/birds/birds.dart';
+
 import 'package:orands_fish_booking/cart/cart.dart';
 import 'package:orands_fish_booking/const/const.dart';
-import 'package:orands_fish_booking/edibleseeds/edible.dart';
-import 'package:orands_fish_booking/feeds/feeds.dart';
+import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
+import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/search/search.dart';
-import 'package:orands_fish_booking/settings/settung.dart';
+
 import 'package:orands_fish_booking/widgets/heading.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  Stream<List<ModelProduct>> showTheoriginalOfferList() {
+    return FirebaseFirestore.instance
+        .collection('collection')
+        .doc('category1')
+        .collection('offerlist')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => ModelProduct.fromJson(doc.data()))
+            .toList());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +65,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: GestureDetector(
-                        onTap: (() {
+                        onTap: () {
                           Get.to(() => Settings());
-                        }),
+                        },
                         child: const Icon(
                           Icons.menu,
                           size: 30,
@@ -65,7 +75,51 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       trailing: GestureDetector(
-                        onTap: () => Get.to(() => Search()),
+                        onTap: () {
+                          // Get.to(() => Search());
+                          showGeneralDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierLabel: MaterialLocalizations.of(context)
+                                  .modalBarrierDismissLabel,
+                              barrierColor: Color.fromARGB(115, 24, 22, 22),
+                              transitionDuration:
+                                  const Duration(milliseconds: 500),
+                              pageBuilder: (BuildContext buildContext,
+                                  Animation animation,
+                                  Animation secondaryAnimation) {
+                                return Center(
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        width: 340.w,
+                                        height: 700.h,
+                                        margin: EdgeInsets.only(
+                                            top: 100, bottom: 40),
+                                        padding: EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 10,
+                                            left: 10,
+                                            right: 10),
+                                        child: Search(),
+                                      ),
+                                      Positioned(
+                                          top: 33.h,
+                                          left: 109.w,
+                                          child: CircleAvatar(
+                                            radius: 60,
+                                            backgroundImage: NetworkImage(
+                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbGrm3C3QgWyL0mk3GbQ6JC36t_w1G9VzAww&usqp=CAU'),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
                         child: CircleAvatar(
                           backgroundColor: Colors.white.withOpacity(.5),
                           child: const Center(
@@ -98,19 +152,49 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Container(
                             height: shieght / 5.5,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                // shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return OfferContainer(
-                                    image: 'assets/Moor_color_change.jpg',
-                                    itemname: 'Gold fish',
-                                    itemprice: '5rs',
-                                    shieght: shieght,
-                                    swidth: swidth,
-                                    title1: 'min 100ps',
-                                  );
+                            child: StreamBuilder(
+                                stream: showTheoriginalOfferList(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Center(
+                                        child: CartHeading(
+                                            title1: 'Something wrong'));
+                                  }
+                                  if (snapshot.hasData) {
+                                    final list = snapshot.data!;
+                                    final aqofferlist = list
+                                        .where((element) =>
+                                            element.category == 'aquarium')
+                                        .toList();
+
+                                    return ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        // shrinkWrap: true,
+                                        itemCount: aqofferlist.length,
+                                        itemBuilder: (context, index) {
+                                          final offeritem = aqofferlist[index];
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Get.to(ItemShowingScreen(
+                                                  itemdetail: offeritem));
+                                            },
+                                            child: OfferContainer(
+                                              image: offeritem.imagelist![0],
+                                              itemname: offeritem.name,
+                                              itemprice: '${offeritem.price}rs',
+                                              shieght: shieght,
+                                              swidth: swidth,
+                                              title1:
+                                                  'min ${offeritem.minno}ps',
+                                            ),
+                                          );
+                                        });
+                                  } else {
+                                    return Center(
+                                        child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    ));
+                                  }
                                 }),
                           ),
                           Row(
@@ -120,44 +204,109 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Container(
                             height: Shieght(context) / 5.5,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                // shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return OfferContainer(
-                                    image: 'assets/maxresdefault.jpg',
-                                    itemname: 'Love birds',
-                                    itemprice: '200rs',
-                                    shieght: shieght,
-                                    swidth: swidth,
-                                    title1: 'min 10ps',
-                                  );
+                            child: StreamBuilder(
+                                stream: showTheoriginalOfferList(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Center(
+                                        child: CartHeading(
+                                            title1: 'Something wrong'));
+                                  }
+                                  if (snapshot.hasData) {
+                                    final list = snapshot.data!;
+                                    final offerlist = list
+                                        .where((element) =>
+                                            element.category == 'birds')
+                                        .toList();
+
+                                    return offerlist.length != 0
+                                        ? ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            // shrinkWrap: true,
+                                            itemCount: offerlist.length,
+                                            itemBuilder: (context, index) {
+                                              final offeritem =
+                                                  offerlist[index];
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  Get.to(ItemShowingScreen(
+                                                      itemdetail: offeritem));
+                                                },
+                                                child: OfferContainer(
+                                                  image: offeritem
+                                                              .imagelist?[0] ==
+                                                          null
+                                                      ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtF4VdOl8_m-1FayEemKpgZvDuvgHOqAhFQ&usqp=CAU'
+                                                      : offeritem.imagelist?[0],
+                                                  itemname: offeritem.name,
+                                                  itemprice:
+                                                      '${offeritem.price}rs',
+                                                  shieght: shieght,
+                                                  swidth: swidth,
+                                                  title1:
+                                                      'min ${offeritem.minno}ps',
+                                                ),
+                                              );
+                                            })
+                                        : Center(
+                                            child: Textwidgrt(
+                                                title1: 'No Offers'));
+                                  } else {
+                                    return Center(
+                                        child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    ));
+                                  }
                                 }),
                           ),
                           Row(
                             children: [
-                              Textwidgrt(title1: "Offers in feeds"),
+                              Textwidgrt(title1: "All Offers"),
                             ],
                           ),
                           Container(
-                            height: shieght / 5.5,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                // shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return OfferContainer(
-                                    image:
-                                        'assets/chicken-feed-pellets-1200x900.webp',
-                                    itemname: 'poultry feed',
-                                    itemprice: '20rs',
-                                    shieght: shieght,
-                                    swidth: swidth,
-                                    title1: 'min 10Kg',
-                                  );
-                                }),
-                          ),
+                              height: shieght / 5.5,
+                              child: StreamBuilder(
+                                  stream: showTheoriginalOfferList(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                          child: CartHeading(
+                                              title1: 'Something wrong'));
+                                    }
+                                    if (snapshot.hasData) {
+                                      final list = snapshot.data!;
+
+                                      return ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          // shrinkWrap: true,
+                                          itemCount: list.length,
+                                          itemBuilder: (context, index) {
+                                            final offeritem = list[index];
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Get.to(ItemShowingScreen(
+                                                    itemdetail: offeritem));
+                                              },
+                                              child: OfferContainer(
+                                                image: offeritem.imagelist![0],
+                                                itemname: offeritem.name,
+                                                itemprice:
+                                                    '${offeritem.price}rs',
+                                                shieght: shieght,
+                                                swidth: swidth,
+                                                title1:
+                                                    'min ${offeritem.minno}ps',
+                                              ),
+                                            );
+                                          });
+                                    } else {
+                                      return Center(
+                                          child: CircularProgressIndicator(
+                                        color: Colors.black,
+                                      ));
+                                    }
+                                  })),
                           Row(
                             children: [
                               Textwidgrt(
@@ -174,69 +323,19 @@ class HomeScreen extends StatelessWidget {
                               crossAxisSpacing: 35.0,
                               mainAxisSpacing: 3,
                               children: List.generate(5, (index) {
-                                if (index == 0) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => EdibleSeeds(
-                                          category: 'Edible Fishes',
-                                        )),
-                                    child: CategoryContainer(
-                                        image:
-                                            'assets/141ad8d639fd9bfedc719ec93a3b80ef.jpg',
-                                        categoryname: 'Edible Fishes',
-                                        shieght: shieght,
-                                        swidth: swidth),
-                                  );
-                                }
-                                if (index == 1) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => AquariumFishes(
-                                          category: 'Aquarium',
-                                        )),
-                                    child: CategoryContainer(
-                                        image:
-                                            'assets/cartoon-aquarium-fish-vector-1132116.jpg',
-                                        categoryname: 'Aquarium',
-                                        shieght: shieght,
-                                        swidth: swidth),
-                                  );
-                                }
-                                if (index == 2) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => Accessories(
-                                          titlelarge: 'Accessories',
-                                        )),
-                                    child: CategoryContainer(
-                                        image:
-                                            'assets/pet-shop-vet-store-set-domestic-animals-accessories-cat-dog-fish-cartoon-vector-food-toys-aid-bowl-shampoo-aquarium-240357678.jpg',
-                                        categoryname: 'Accessories',
-                                        shieght: shieght,
-                                        swidth: swidth),
-                                  );
-                                }
+                                final tocategory = categorylist[index];
 
-                                if (index == 3) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => Feeds(
-                                          category: 'Feeds',
-                                        )),
-                                    child: CategoryContainer(
-                                        image: 'assets/images.jpeg',
-                                        categoryname: 'feeds',
-                                        shieght: shieght,
-                                        swidth: swidth),
-                                  );
-                                } else {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => Birds(
-                                          titlelarge: 'birds',
-                                        )),
-                                    child: CategoryContainer(
-                                        image: 'assets/images (1).jpeg',
-                                        categoryname: 'Birds',
-                                        shieght: shieght,
-                                        swidth: swidth),
-                                  );
-                                }
+                                return GestureDetector(
+                                  onTap: () => Get.to(() => Accessories(
+                                        category: tocategory.categoryname,
+                                        titlelarge: tocategory.categoryheading,
+                                      )),
+                                  child: CategoryContainer(
+                                      image: tocategory.image,
+                                      categoryname: tocategory.categoryheading,
+                                      shieght: shieght,
+                                      swidth: swidth),
+                                );
                               }),
                             ),
                           )
@@ -290,7 +389,7 @@ class OfferContainer extends StatelessWidget {
                   width: swidth / 2.5,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(7),
-                    child: Image.asset(
+                    child: Image.network(
                       image,
                       fit: BoxFit.cover,
                     ),
@@ -370,3 +469,37 @@ class CategoryContainer extends StatelessWidget {
     );
   }
 }
+
+class Categorydetails {
+  String categoryname;
+  String categoryheading;
+  String image;
+  Categorydetails(
+      {required this.image,
+      required this.categoryheading,
+      required this.categoryname});
+}
+
+final categorylist = [
+  Categorydetails(
+      image: 'assets/141ad8d639fd9bfedc719ec93a3b80ef.jpg',
+      categoryheading: 'Edible Fishes',
+      categoryname: 'edibleseeds'),
+  Categorydetails(
+      image: 'assets/cartoon-aquarium-fish-vector-1132116.jpg',
+      categoryheading: 'Aquarium',
+      categoryname: 'aquarium'),
+  Categorydetails(
+      image:
+          'assets/pet-shop-vet-store-set-domestic-animals-accessories-cat-dog-fish-cartoon-vector-food-toys-aid-bowl-shampoo-aquarium-240357678.jpg',
+      categoryheading: 'Accessories',
+      categoryname: 'accessories'),
+  Categorydetails(
+      image: 'assets/images.jpeg',
+      categoryheading: 'Feeds',
+      categoryname: 'feeds'),
+  Categorydetails(
+      image: 'assets/images (1).jpeg',
+      categoryheading: 'Birds',
+      categoryname: 'birds'),
+];

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:orands_fish_booking/aquariumfishes/aquariumcontroller.dart';
-import 'package:orands_fish_booking/aquariumfishes/aquariumfishes.dart';
+
 import 'package:orands_fish_booking/cart/placeordercontroller.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
 import 'package:orands_fish_booking/model/model.dart';
+import 'package:orands_fish_booking/search/search.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/TypeItem.dart';
 
@@ -21,6 +22,8 @@ class ListingItemPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shieght = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Stack(
       children: [
@@ -72,7 +75,7 @@ class ListingItemPage1 extends StatelessWidget {
               ),
             ),
             StreamBuilder(
-                stream: showTheList(),
+                stream: itemdtail,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return Text('some thing went wrong');
@@ -81,40 +84,27 @@ class ListingItemPage1 extends StatelessWidget {
                   if (snapshot.hasData) {
                     final showingitems = snapshot.data!;
                     return Expanded(
-                      child: GridView.count(
+                      child: StaggeredGrid.count(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                        children: List.generate(showingitems.length, (index) {
+                          final item = showingitems[index];
 
-                          // shrinkWrap: true,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 30,
-                          childAspectRatio: 1 / 1.2,
-                          children: List.generate(showingitems.length, (index) {
-                            //final movie = state.searchResultList[index];
-                            return GestureDetector(
-                              onTap: () => Get.to(() => ItemShowingScreen(
-                                    itemdetail: showingitems[index],
-                                  )),
-                              child: Card(
-                                //elevation: 12,
-                                color: Color.fromARGB(255, 115, 160, 197),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: TypeItem1(
-                                    itemdetail: showingitems[index],
-                                    image: showingitems[index].imagelist![0],
-                                    itemname: showingitems[index].name,
-                                    title1:
-                                        showingitems[index].price.toString(),
-                                    title2:
-                                        showingitems[index].minno.toString(),
-                                    shieght: 700.h,
-                                    swidth: 200.w),
-                              ),
-                            );
-                            //  MainCard(
-                            //   imageUrl: '$imageAppendUrl${movie.posterPath}',
-                            // );
-                          })),
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(ItemShowingScreen(itemdetail: item));
+                            },
+                            child: StaggeredItem(
+                              isfromtotal: 'yes',
+                              item: item,
+                              shieght: shieght,
+                              swidth: swidth,
+                              index: index,
+                            ),
+                          );
+                        }),
+                      ),
                     );
 
                     // ListView(

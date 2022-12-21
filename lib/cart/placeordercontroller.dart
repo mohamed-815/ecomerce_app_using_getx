@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:get/get.dart';
+import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/cart/cart.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/ordermodelclass.dart';
 import 'package:orands_fish_booking/orderpage.dart';
-import 'package:orands_fish_booking/cart/modelclasses/ordermodelclass.dart';
+
 import 'package:orands_fish_booking/cart/placeOrder.dart';
 import 'package:orands_fish_booking/orderpage.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -100,6 +102,7 @@ addingToFireBase(List<OrderModel> orderlist) async {}
 Addingtoorderlist() async {
   orderlist = cartlist!
       .map((e) => OrderModel(
+          email: email!,
           locationdetail: locationdetails!.toJson(),
           minnomultiple: e.minnomultiple,
           subtotalprice: e.subtotalprice,

@@ -33,7 +33,7 @@ class AuthController extends GetxController {
       print('hello');
       await Get.offAll(() => LoginPage());
     } else {
-      await Get.offAll(() => const HomeScreen());
+      await Get.offAll(() => HomeScreen());
     }
   }
 

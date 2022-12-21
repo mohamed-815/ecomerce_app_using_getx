@@ -1,23 +1,19 @@
-import 'package:orands_fish_booking/cart/modelclasses/locationmodel.dart';
-
-class OrderModel {
+class FavModel {
   // String image;
+  String oldid;
   String id;
   String category;
   String name;
   String size;
   double price;
   double minno;
-  double minnomultiple;
   String description;
-  double subtotalprice;
   List<dynamic>? imagelist = [];
-  Map<String, dynamic>? locationdetail;
+  String? isfave;
 
-  OrderModel({
-    required this.locationdetail,
-    required this.minnomultiple,
-    required this.subtotalprice,
+  FavModel({
+    required this.oldid,
+    this.isfave,
     this.imagelist,
     // required this.imagelist,
     this.id = '',
@@ -32,9 +28,8 @@ class OrderModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'locationdetail': locationdetail,
-      'minnomultiple': minnomultiple,
-      'subtotalprice': subtotalprice,
+      'oldid': oldid,
+      'isfave': isfave,
       'id': id,
       'category': category,
       'name': name,
@@ -46,11 +41,10 @@ class OrderModel {
     };
   }
 
-  static OrderModel fromJson(Map<String, dynamic> json) {
-    return OrderModel(
-      locationdetail: json['locationdetail'],
-      minnomultiple: json['minnomultiple'],
-      subtotalprice: json['subtotalprice'],
+  static FavModel fromJson(Map<String, dynamic> json) {
+    return FavModel(
+      oldid: json['oldid'],
+      isfave: json['isfave'],
       id: json['id'],
       description: json['description'],
       name: json['name'],

@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:orands_fish_booking/cart/locationdetails/bookinglocation.dart';
 
 import 'package:orands_fish_booking/cart/cart.dart';
-import 'package:orands_fish_booking/cart/modelclasses/locationmodel.dart';
+
 import 'package:orands_fish_booking/cart/placeordercontroller.dart';
 import 'package:orands_fish_booking/const/const.dart';
-import 'package:orands_fish_booking/feeds/feedscontroller.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/locationmodel.dart';
 import 'package:orands_fish_booking/orderpage.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';

@@ -15,8 +15,10 @@ class CartController extends GetxController {
     final fireinstance = FirebaseFirestore.instance
         .collection('collection')
         .doc('users')
+        .collection(email!)
+        .doc('userdetails')
         .collection('total')
-        .doc('total1');
+        .doc('total');
 
     fireinstance.set({'total': total});
   }
@@ -26,6 +28,8 @@ Stream<double> showTotal() {
   return FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
+      .collection(email!)
+      .doc('userdetails')
       .collection('total')
       .snapshots()
       .map((snapshot) => snapshot.docs

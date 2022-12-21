@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
+import 'package:orands_fish_booking/widgetscommon/common_textform.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({super.key});

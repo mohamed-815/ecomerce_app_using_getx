@@ -7,6 +7,7 @@ import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/home/homescreen.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
+import 'package:orands_fish_booking/widgetscommon/common_textform.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});

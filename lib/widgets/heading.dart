@@ -158,6 +158,22 @@ class smalltextboldWidjets25 extends StatelessWidget {
   }
 }
 
+class smalltextboldWidjets25black extends StatelessWidget {
+  smalltextboldWidjets25black({
+    required this.Title,
+    Key? key,
+  }) : super(key: key);
+  String Title;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      Title,
+      style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: kblack),
+    );
+  }
+}
+
 class TextOnly25 extends StatelessWidget {
   TextOnly25({Key? key, required this.title1}) : super(key: key);
 

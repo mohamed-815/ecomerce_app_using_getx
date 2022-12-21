@@ -14,17 +14,24 @@ import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
 
 class Accessories extends StatelessWidget {
-  Accessories({required this.titlelarge, super.key});
+  Accessories({required this.category, required this.titlelarge, super.key});
   String titlelarge;
+  String category;
 
   @override
   Widget build(BuildContext context) {
     final pages = [
-      NewWidget(titlelarge: titlelarge),
-      NewWidget(titlelarge: titlelarge),
-      NewWidget(
+      ListingItemPage1(
         titlelarge: titlelarge,
-        product1: showTheList(),
+        itemdtail: showTheList(category: category, size: 'small'),
+      ),
+      ListingItemPage1(
+        titlelarge: titlelarge,
+        itemdtail: showTheList(category: category, size: 'medium'),
+      ),
+      ListingItemPage1(
+        titlelarge: titlelarge,
+        itemdtail: showTheList(category: category, size: 'large'),
       ),
     ];
     return GetBuilder<AccessoriesController>(
@@ -70,30 +77,6 @@ class Accessories extends StatelessWidget {
                 }),
           );
         });
-  }
-}
-
-class NewWidget extends StatelessWidget {
-  NewWidget({
-    Key? key,
-    this.product1,
-    required this.titlelarge,
-  }) : super(key: key);
-
-  final String titlelarge;
-  Stream<List<ModelProduct>>? product1;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: GetBuilder<AccessoriesController>(
-            init: AccessoriesController(),
-            builder: (c) {
-              return ListingItemPage1(
-                titlelarge: titlelarge,
-                itemdtail: showTheList(),
-              );
-            }));
   }
 }
 

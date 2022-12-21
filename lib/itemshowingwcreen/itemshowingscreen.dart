@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:orands_fish_booking/birds/birdscontroller.dart';
 import 'package:orands_fish_booking/cart/cart.dart';
-import 'package:orands_fish_booking/cart/cartmodel.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/cartmodel.dart';
 import 'package:orands_fish_booking/const/const.dart';
-import 'package:orands_fish_booking/edibleseeds/edible.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/ItemshowingController.dart';
-import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';
+
 import 'package:orands_fish_booking/itemshowingwcreen/widgets/widgets.dart';
 import 'package:orands_fish_booking/model/model.dart';
+import 'package:orands_fish_booking/search/widjets/notfoundmsg.dart';
+
 import 'package:orands_fish_booking/settings/settung.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
+import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
 
 class ItemShowingScreen extends StatelessWidget {
   ItemShowingScreen({required this.itemdetail, super.key});
@@ -141,6 +141,150 @@ class ItemShowingScreen extends StatelessWidget {
                                   itemdetail.description,
                                   //  "min 100 pc,\nOnly .2 inche size is available,\nseeds must be contitioned before puting in to the pond",
                                   style: TextStyle(color: Colors.grey),
+                                ),
+                                khieght,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () async {
+                                          await showGeneralDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              barrierLabel:
+                                                  MaterialLocalizations.of(
+                                                          context)
+                                                      .modalBarrierDismissLabel,
+                                              barrierColor: Color.fromARGB(115,
+                                                  24, 22, 22),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 500),
+                                              pageBuilder:
+                                                  (BuildContext buildContext,
+                                                      Animation animation,
+                                                      Animation
+                                                          secondaryAnimation) {
+                                                return SizeVarientItemShow(
+                                                  Streamlist: showTheList(
+                                                      category:
+                                                          itemdetail.category,
+                                                      size: 'small'),
+                                                );
+                                              });
+
+                                          // List<ModelProduct> lastlist = [];
+
+                                          // await Get.to(() => StreamBuilder(
+                                          //     stream: showTheList(
+                                          //         category: itemdetail.category,
+                                          //         size: 'small'),
+                                          //     builder: (context, snapshot) {
+                                          //       if (snapshot.hasError) {
+                                          //         return Center(
+                                          //           child: Text(
+                                          //               'Some Thing Wrong'),
+                                          //         );
+                                          //       }
+                                          //       if (snapshot.hasData) {
+                                          //         final list = snapshot.data;
+                                          //         print(itemdetail.name);
+
+                                          //         lastlist = list!
+                                          //             .where((element) =>
+                                          //                 element.name ==
+                                          //                 itemdetail.name)
+                                          //             .toList();
+
+                                          //         print(lastlist.toString());
+                                          //         return lastlist.isNotEmpty
+                                          //             ? ItemShowingScreen(
+                                          //                 itemdetail:
+                                          //                     lastlist[0],
+                                          //               )
+                                          //             : ItemShowingScreen(
+                                          //                 itemdetail:
+                                          //                     itemdetail,
+                                          //               );
+                                          //       } else {
+                                          //         return CircularProgressIndicator();
+                                          //       }
+                                          //     }));
+                                        },
+                                        child: Card(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: smalltextboldWidjets(
+                                              Title: 'Small'),
+                                        ))),
+                                    GestureDetector(
+                                        onTap: () async {
+                                          await showGeneralDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              barrierLabel:
+                                                  MaterialLocalizations.of(
+                                                          context)
+                                                      .modalBarrierDismissLabel,
+                                              barrierColor: Color.fromARGB(115,
+                                                  24, 22, 22),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 500),
+                                              pageBuilder:
+                                                  (BuildContext buildContext,
+                                                      Animation animation,
+                                                      Animation
+                                                          secondaryAnimation) {
+                                                return SizeVarientItemShow(
+                                                  Streamlist: showTheList(
+                                                      category:
+                                                          itemdetail.category,
+                                                      size: 'medium'),
+                                                );
+                                              });
+                                        },
+                                        child: Card(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: smalltextboldWidjets(
+                                              Title: 'Medium'),
+                                        ))),
+                                    GestureDetector(
+                                        onTap: () async {
+                                          await showGeneralDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              barrierLabel:
+                                                  MaterialLocalizations.of(
+                                                          context)
+                                                      .modalBarrierDismissLabel,
+                                              barrierColor: Color.fromARGB(115,
+                                                  24, 22, 22),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 500),
+                                              pageBuilder:
+                                                  (BuildContext buildContext,
+                                                      Animation animation,
+                                                      Animation
+                                                          secondaryAnimation) {
+                                                return SizeVarientItemShow(
+                                                  Streamlist: showTheList(
+                                                      category:
+                                                          itemdetail.category,
+                                                      size: 'large'),
+                                                );
+                                              });
+                                        },
+                                        child: Card(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: smalltextboldWidjets(
+                                              Title: 'Large'),
+                                        ))),
+                                  ],
                                 )
                               ],
                             )
@@ -154,7 +298,7 @@ class ItemShowingScreen extends StatelessWidget {
                     left: 15,
                     child: Row(
                       children: [
-                        GetBack1(),
+                        backbutton1(),
                       ],
                     ),
                   ),
@@ -180,6 +324,70 @@ class ItemShowingScreen extends StatelessWidget {
               ),
             );
           }),
+    );
+  }
+
+  Center SizeVarientItemShow({
+    required Stream<List<ModelProduct>> Streamlist,
+  }) {
+    return Center(
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 18, 18, 18),
+                borderRadius: BorderRadius.circular(12)),
+            width: 340.w,
+            height: 700.h,
+            margin: EdgeInsets.only(top: 100, bottom: 40),
+            padding: EdgeInsets.only(
+              top: 0,
+              // bottom: 10,
+              //   left: 10,
+              //  right: 10
+            ),
+            child: StreamBuilder(
+                stream: Streamlist,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Some Thing Wrong'),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final list = snapshot.data;
+                    print(itemdetail.name);
+
+                    final lastlist = list!
+                        .where((element) => element.name == itemdetail.name)
+                        .toList();
+
+                    print(lastlist.toString());
+                    return lastlist.isNotEmpty
+                        ? ItemShowingScreen(
+                            itemdetail: lastlist[0],
+                          )
+                        : Center(
+                            child: NotFoundMsg(
+                                image:
+                                    'https://media3.giphy.com/media/1yiPpiqnOINUovWlCq/giphy.gif?cid=790b76112f8dd1dff8284d3873109383b979152b28e35c92&rid=giphy.gif&ct=g',
+                                title: 'ooOps'),
+                          );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                }),
+          ),
+          Positioned(
+              top: 33.h,
+              left: 109.w,
+              child: CircleAvatar(
+                radius: 70,
+                backgroundImage: NetworkImage(
+                    'https://acegif.com/wp-content/uploads/gifs/fish-97.gif'),
+              ))
+        ],
+      ),
     );
   }
 }

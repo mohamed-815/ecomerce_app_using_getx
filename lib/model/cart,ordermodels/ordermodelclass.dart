@@ -1,19 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/locationmodel.dart';
 
-class ModelProduct {
+class OrderModel {
   // String image;
+  String email;
   String id;
   String category;
   String name;
   String size;
   double price;
   double minno;
+  double minnomultiple;
   String description;
+  double subtotalprice;
   List<dynamic>? imagelist = [];
-  String? isfave;
+  Map<String, dynamic>? locationdetail;
 
-  ModelProduct({
-    this.isfave,
+  OrderModel({
+    required this.email,
+    required this.locationdetail,
+    required this.minnomultiple,
+    required this.subtotalprice,
     this.imagelist,
     // required this.imagelist,
     this.id = '',
@@ -28,7 +34,10 @@ class ModelProduct {
 
   Map<String, dynamic> toJson() {
     return {
-      'isfave': isfave,
+      'email': email,
+      'locationdetail': locationdetail,
+      'minnomultiple': minnomultiple,
+      'subtotalprice': subtotalprice,
       'id': id,
       'category': category,
       'name': name,
@@ -40,9 +49,12 @@ class ModelProduct {
     };
   }
 
-  static ModelProduct fromJson(Map<String, dynamic> json) {
-    return ModelProduct(
-      isfave: json['isfave'],
+  static OrderModel fromJson(Map<String, dynamic> json) {
+    return OrderModel(
+      email: json['email'],
+      locationdetail: json['locationdetail'],
+      minnomultiple: json['minnomultiple'],
+      subtotalprice: json['subtotalprice'],
       id: json['id'],
       description: json['description'],
       name: json['name'],
@@ -53,20 +65,4 @@ class ModelProduct {
       imagelist: json['imagelist'],
     );
   }
-}
-
-Stream<List<ModelProduct>> showTheList(
-    {required String category, required String size}) {
-  return FirebaseFirestore.instance
-      .collection('collection')
-      .doc('category1')
-      .collection('category1')
-      .doc(category)
-      .collection('itemsize')
-      .doc(size)
-      .collection(size)
-      .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => ModelProduct.fromJson(doc.data()))
-          .toList());
 }

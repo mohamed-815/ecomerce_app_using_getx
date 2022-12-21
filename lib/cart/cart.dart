@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/cart/cartcontroller.dart';
-import 'package:orands_fish_booking/cart/cartmodel.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/cartmodel.dart';
 import 'package:orands_fish_booking/cart/placeOrder.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/itemshowingwcreen/itemmodelclass.dart';

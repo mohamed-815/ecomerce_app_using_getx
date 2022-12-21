@@ -5,11 +5,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/cart/locationdetails/locationcontroller.dart';
-import 'package:orands_fish_booking/cart/modelclasses/locationmodel.dart';
 
 import 'package:orands_fish_booking/const/const.dart';
+import 'package:orands_fish_booking/model/cart,ordermodels/locationmodel.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
+import 'package:orands_fish_booking/widgetscommon/common_textform.dart';
 
 class BookingLocation extends StatelessWidget {
   BookingLocation({super.key});

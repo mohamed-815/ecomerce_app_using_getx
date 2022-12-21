@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/cart/locationdetails/bookinglocation.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/orderpage.dart';
+import 'package:orands_fish_booking/settings/profileshow.dart';
 import 'package:orands_fish_booking/settings/changepassword.dart';
 import 'package:orands_fish_booking/settings/profile.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
@@ -16,6 +20,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -32,6 +37,7 @@ class Settings extends StatelessWidget {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(children: [
           khieght,
           Row(
@@ -86,17 +92,29 @@ class Settings extends StatelessWidget {
                   kwidth,
                   kwidth,
                   kwidth,
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/Moor_color_change.jpg'),
-                    // child: Image.asset(
-                    //   'assets/Moor_color_change.jpg',
-                    //   fit: BoxFit.cover,
-                    // ),
+                  GestureDetector(
+                    onTap: () => Get.defaultDialog(
+                        title: '', content: ProfileShow(), radius: 10.0),
+                    child: CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/Moor_color_change.jpg'),
+                      // child: Image.asset(
+                      //   'assets/Moor_color_change.jpg',
+                      //   fit: BoxFit.cover,
+                      // ),
+                    ),
                   ),
                   kwidth,
-                  Text(
-                    'naveen',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'naveen',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w300),
+                      ),
+                      Text(email!)
+                    ],
                   ),
                 ],
               ),
@@ -158,7 +176,10 @@ class Settings extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => Get.to(() => Profile()),
+                onTap: () => Get.defaultDialog(
+                    title: '', content: EditProfile(), radius: 10.0),
+
+                //   Get.to(() => Profile()),
                 child: Card(
                   child: ListTile(
                     leading: Text('Edit Profile'),
