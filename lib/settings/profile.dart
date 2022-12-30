@@ -181,22 +181,33 @@ addingToFireprof(ProfileDetail profieldetails) async {
   final adingtofirebase = FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
-      .collection(email!)
-      .doc('userdetails')
+      .collection('users')
+      .doc(email!)
+      .collection('userdetails')
+      .doc('profiledetail')
       .collection('profiledetail')
       .doc('profiledetail');
+
+  final adingtofirebaseemail = FirebaseFirestore.instance
+      .collection('collection')
+      .doc('users')
+      .collection('users')
+      .doc(email!);
 
   final json = profieldetails.toJson();
 
   await adingtofirebase.set(json);
+  await adingtofirebaseemail.set({'name': email});
 }
 
 Stream<ProfileDetail> ProfileStream() {
   return FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
-      .collection(email!)
-      .doc('userdetails')
+      .collection('users')
+      .doc(email!)
+      .collection('userdetails')
+      .doc('profiledetail')
       .collection('profiledetail')
       .snapshots()
       .map((snapshot) => snapshot.docs

@@ -11,7 +11,7 @@ import 'package:orands_fish_booking/itemshowingwcreen/widgets/widgets.dart';
 import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/search/widjets/notfoundmsg.dart';
 
-import 'package:orands_fish_booking/settings/settung.dart';
+import 'package:orands_fish_booking/settings/widgets/settingscard.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
 
@@ -29,13 +29,13 @@ class ItemShowingScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   Image.network(
-                    "https://images.pexels.com/photos/3133396/pexels-photo-3133396.jpeg?cs=srgb&dl=pexels-valeriia-miller-3133396.jpg&fm=jpg",
+                    "https://c4.wallpaperflare.com/wallpaper/503/63/644/black-blue-fish-wallpaper-preview.jpg",
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
                   ),
                   Container(
-                    color: Colors.black.withOpacity(.9),
+                    color: Colors.black.withOpacity(.7),
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                   ),
@@ -134,13 +134,23 @@ class ItemShowingScreen extends StatelessWidget {
                             khieght,
                             Column(
                               children: [
-                                GreyText(
-                                  title: 'Description',
-                                ),
-                                Text(
-                                  itemdetail.description,
-                                  //  "min 100 pc,\nOnly .2 inche size is available,\nseeds must be contitioned before puting in to the pond",
-                                  style: TextStyle(color: Colors.grey),
+                                Card(
+                                  color: Colors.white.withOpacity(.1),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        GreyText(
+                                          title: 'Description',
+                                        ),
+                                        Text(
+                                          itemdetail.description,
+                                          //  "min 100 pc,\nOnly .2 inche size is available,\nseeds must be contitioned before puting in to the pond",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 khieght,
                                 Row(
@@ -213,11 +223,15 @@ class ItemShowingScreen extends StatelessWidget {
                                           //     }));
                                         },
                                         child: Card(
+                                            shadowColor: Colors.grey,
+                                            elevation: 20.h,
+                                            color: Colors.black,
                                             child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: smalltextboldWidjets(
-                                              Title: 'Small'),
-                                        ))),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: smalltextboldWidjets(
+                                                  Title: 'Small'),
+                                            ))),
                                     GestureDetector(
                                         onTap: () async {
                                           await showGeneralDialog(
@@ -246,11 +260,15 @@ class ItemShowingScreen extends StatelessWidget {
                                               });
                                         },
                                         child: Card(
+                                            shadowColor: Colors.grey,
+                                            elevation: 20.h,
+                                            color: Colors.black,
                                             child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: smalltextboldWidjets(
-                                              Title: 'Medium'),
-                                        ))),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: smalltextboldWidjets(
+                                                  Title: 'Medium'),
+                                            ))),
                                     GestureDetector(
                                         onTap: () async {
                                           await showGeneralDialog(
@@ -279,11 +297,15 @@ class ItemShowingScreen extends StatelessWidget {
                                               });
                                         },
                                         child: Card(
+                                            shadowColor: Colors.grey,
+                                            elevation: 20.h,
+                                            color: Colors.black,
                                             child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: smalltextboldWidjets(
-                                              Title: 'Large'),
-                                        ))),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: smalltextboldWidjets(
+                                                  Title: 'Large'),
+                                            ))),
                                   ],
                                 )
                               ],

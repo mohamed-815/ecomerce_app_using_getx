@@ -2,11 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:orands_fish_booking/home/homescreen.dart';
-import 'package:orands_fish_booking/registerpage/registerpage.dart';
+import 'package:orands_fish_booking/bottombavigation/bottomnavi.dart';
 import 'package:orands_fish_booking/registerpage/signpage.dart';
 
-final email = FirebaseAuth.instance.currentUser!.email;
+String? email;
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -28,12 +27,13 @@ class AuthController extends GetxController {
   }
 
   _initialScreen(User? user) async {
+    email = user?.email;
     print(user);
     if (user == null) {
       print('hello');
       await Get.offAll(() => LoginPage());
     } else {
-      await Get.offAll(() => HomeScreen());
+      await Get.offAll(() => BottomNave());
     }
   }
 
@@ -75,7 +75,7 @@ class AuthController extends GetxController {
 
     final user = (await auth
         .signInWithCredential(credential)
-        .then((value) => Get.offAll(() => HomeScreen())));
+        .then((value) => Get.offAll(() => BottomNave())));
   }
 
   void googlesignout() async {

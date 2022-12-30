@@ -14,11 +14,11 @@ import 'package:orands_fish_booking/widgetscommon/common_textform.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   AuthController ac = Get.find();
+  var emailcontroller = TextEditingController();
+  var Passwordcontroller = TextEditingController();
+  var Passwordcontroller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var emailcontroller = TextEditingController();
-    var Passwordcontroller = TextEditingController();
-    var Passwordcontroller2 = TextEditingController();
     final shieght = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,16 +37,12 @@ class LoginPage extends StatelessWidget {
               khieght,
               khieght,
               khieght,
-              Textwidgrt(title1: 'Log here'),
+              Textwidgrtblack(title1: 'Log here'),
               khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "User Name"),
-                ],
-              ),
+
               khieght,
               Container(
-                height: shieght / 16,
+                //height: shieght / 16,
                 child: TextField1(
                   controller1: emailcontroller,
                   hint: 'Email',
@@ -55,21 +51,16 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "Password"),
-                ],
-              ),
+
               khieght,
               Container(
-                height: shieght / 16,
+                //height: shieght / 16,
                 child: TextField1(
                     controller1: Passwordcontroller,
                     hint: 'Enter Password',
                     lebel: 'Password'),
               ),
 
-              khieght,
               khieght,
 
               ElevatedButton(

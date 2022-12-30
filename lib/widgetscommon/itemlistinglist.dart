@@ -10,6 +10,7 @@ import 'package:orands_fish_booking/model/model.dart';
 import 'package:orands_fish_booking/search/search.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/TypeItem.dart';
+import 'package:orands_fish_booking/widgetscommon/steggereditem.dart';
 
 class ListingItemPage1 extends StatelessWidget {
   ListingItemPage1({
@@ -27,12 +28,16 @@ class ListingItemPage1 extends StatelessWidget {
     return SafeArea(
         child: Stack(
       children: [
+        Image.network(
+          "https://i.pinimg.com/736x/cb/be/58/cbbe5877d54aee677cf2e027ca2ccd27.jpg",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
         Container(
-          height: 200.h,
-          decoration: BoxDecoration(
-              color: Color.fromARGB(255, 87, 138, 177),
-              borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(100))),
+          color: Colors.black.withOpacity(.3),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
         ),
         Column(
           children: [
@@ -65,10 +70,22 @@ class ListingItemPage1 extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text(
-                        '6 Prodects found',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      StreamBuilder(
+                          stream: itemdtail,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text('Error Found');
+                            }
+                            if (snapshot.hasData) {
+                              final list = snapshot.data!;
+                              return Text(
+                                '${list.length} Prodects found',
+                                style: TextStyle(color: Colors.white),
+                              );
+                            } else {
+                              return CircularProgressIndicator();
+                            }
+                          }),
                     ],
                   ),
                 ],
@@ -83,87 +100,42 @@ class ListingItemPage1 extends StatelessWidget {
 
                   if (snapshot.hasData) {
                     final showingitems = snapshot.data!;
-                    return Expanded(
-                      child: StaggeredGrid.count(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        children: List.generate(showingitems.length, (index) {
-                          final item = showingitems[index];
+                    return showingitems.isNotEmpty
+                        ? Expanded(
+                            child: StaggeredGrid.count(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 20,
+                              crossAxisSpacing: 20,
+                              children:
+                                  List.generate(showingitems.length, (index) {
+                                final item = showingitems[index];
 
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(ItemShowingScreen(itemdetail: item));
-                            },
-                            child: StaggeredItem(
-                              isfromtotal: 'yes',
-                              item: item,
-                              shieght: shieght,
-                              swidth: swidth,
-                              index: index,
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(ItemShowingScreen(itemdetail: item));
+                                  },
+                                  child: StaggeredItem(
+                                    isfromtotal: 'yes',
+                                    item: item,
+                                    shieght: shieght,
+                                    swidth: swidth,
+                                    index: index,
+                                  ),
+                                );
+                              }),
                             ),
-                          );
-                        }),
-                      ),
-                    );
-
-                    // ListView(
-                    //   children: showingitems
-                    //       .map((e) => MyWidget(
-                    //             item: e,
-                    //             id: e.id,
-                    //           ))
-                    //       .toList(),
-                    // );
+                          )
+                        : Expanded(
+                            child: Center(
+                                child: CartHeading(
+                            title1: 'Nothing Found',
+                          )));
                   } else {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   }
-
-                  // ListView.builder(
-                  //     itemCount: products.length,
-                  //     itemBuilder: (context, index) {
-                  //       final item = products[index];
-                  //       return MyWidget(item: item);
-                  //     }
-
-                  //     //  MyWidget(item: products)
-
-                  //     )
                 }),
-            // Expanded(
-            //   child: GridView.count(
-            //       // shrinkWrap: true,
-            //       crossAxisCount: 2,
-            //       mainAxisSpacing: 6,
-            //       crossAxisSpacing: 30,
-            //       childAspectRatio: 1 / 1.2,
-            //       children: List.generate(15, (index) {
-            //         //final movie = state.searchResultList[index];
-            //         return GestureDetector(
-            //           onTap: () => Get.to(() => ItemShowingScreen(
-            //                 itemdetail: itemdtail,
-            //               )),
-            //           child: Card(
-            //             //elevation: 12,
-            //             color: Color.fromARGB(255, 115, 160, 197),
-            //             shape: RoundedRectangleBorder(
-            //                 borderRadius: BorderRadius.circular(20)),
-            //             child: TypeItem1(
-            //                 image: itemdtail?.imagelist![0],
-            //                 itemname: itemdtail?.name,
-            //                 title1: itemdtail?.minno,
-            //                 title2: itemdtail?.description,
-            //                 shieght: 700.h,
-            //                 swidth: 200.w),
-            //           ),
-            //         );
-            //         //  MainCard(
-            //         //   imageUrl: '$imageAppendUrl${movie.posterPath}',
-            //         // );
-            //       })),
-            // )
           ],
         ),
       ],

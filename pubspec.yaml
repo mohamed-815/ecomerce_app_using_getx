@@ -95,6 +95,9 @@ flutter:
     - assets/download.png
     - assets/accessories/download.jpg
     - assets/accessories/unnamed.jpg
+    - assets/New folder/fish-5970565-1920-bbOs5xt.jpg
+    - assets/New
+      folder/colorful-fish-from-spieces-symphysodon-discus-aquarium_661491-2703.webp
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

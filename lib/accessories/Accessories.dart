@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/accessories/accessoriescontroller.dart';
 import 'package:orands_fish_booking/const/const.dart';
-import 'package:orands_fish_booking/home/homescreen.dart';
-import 'package:orands_fish_booking/itemshowingwcreen/itemshowingcontroller.dart';
-import 'package:orands_fish_booking/itemshowingwcreen/itemshowingscreen.dart';
+
 import 'package:orands_fish_booking/model/model.dart';
-import 'package:orands_fish_booking/settings/settung.dart';
+
+import 'package:orands_fish_booking/settings/widgets/settingscard.dart';
 import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/itemlistinglist.dart';
 

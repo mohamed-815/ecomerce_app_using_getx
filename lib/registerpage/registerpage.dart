@@ -10,16 +10,16 @@ import 'package:orands_fish_booking/widgets/heading.dart';
 import 'package:orands_fish_booking/widgetscommon/common_textform.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
-
+  RegisterPage({super.key});
+  var emailcontroller = TextEditingController();
+  var Passwordcontroller = TextEditingController();
+  var Passwordcontroller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var emailcontroller = TextEditingController();
-    var Passwordcontroller = TextEditingController();
-    var Passwordcontroller2 = TextEditingController();
     final shieght = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 222, 220, 220),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
@@ -35,16 +35,10 @@ class RegisterPage extends StatelessWidget {
               khieght,
               khieght,
               khieght,
-              Textwidgrt(title1: 'Register here'),
+              Textwidgrtblack(title1: 'Register here'),
               khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "User Name"),
-                ],
-              ),
               khieght,
               Container(
-                height: shieght / 16,
                 child: TextField1(
                   controller1: emailcontroller,
                   hint: 'Email',
@@ -53,34 +47,21 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "Password"),
-                ],
-              ),
               khieght,
               Container(
-                height: shieght / 16,
                 child: TextField1(
                     controller1: Passwordcontroller,
                     hint: 'Enter Password',
                     lebel: 'Password'),
               ),
               khieght,
-              Row(
-                children: [
-                  smalltextboldWidjets(Title: "Reenter Password"),
-                ],
-              ),
               khieght,
               Container(
-                height: shieght / 16,
                 child: TextField1(
                     controller1: Passwordcontroller2,
                     hint: 'Reenter Password',
                     lebel: 'Reenter Password'),
               ),
-              khieght,
               khieght,
               khieght,
               ElevatedButton(

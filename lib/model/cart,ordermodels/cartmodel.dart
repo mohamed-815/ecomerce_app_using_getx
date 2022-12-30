@@ -78,8 +78,10 @@ addingToCart(ModelProduct productdetail) async {
   final addingtofirebase = FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
-      .collection(email!)
-      .doc('userdetails')
+      .collection('users')
+      .doc(email!)
+      .collection('userdetails')
+      .doc('cartlist')
       .collection('cartlist')
       .doc();
   cartmodel.id = addingtofirebase.id;

@@ -14,8 +14,10 @@ class OrderModel {
   double subtotalprice;
   List<dynamic>? imagelist = [];
   Map<String, dynamic>? locationdetail;
+  String? orderstatus;
 
   OrderModel({
+    this.orderstatus,
     required this.email,
     required this.locationdetail,
     required this.minnomultiple,
@@ -34,6 +36,7 @@ class OrderModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'orderstatus': orderstatus,
       'email': email,
       'locationdetail': locationdetail,
       'minnomultiple': minnomultiple,
@@ -51,6 +54,7 @@ class OrderModel {
 
   static OrderModel fromJson(Map<String, dynamic> json) {
     return OrderModel(
+      orderstatus: json['orderstatus'],
       email: json['email'],
       locationdetail: json['locationdetail'],
       minnomultiple: json['minnomultiple'],

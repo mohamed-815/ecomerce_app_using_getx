@@ -28,26 +28,18 @@ class placeOrderhere extends StatelessWidget {
       body: SafeArea(
           child: ListView(
         children: [
-          Row(
-            children: [
-              kwidth,
-              backbutton1(),
-            ],
-          ),
           Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                khieght,
-                CartHeading(title1: 'Checkout'),
-                khieght,
+                CartHeadingbblack(title1: 'Checkout'),
                 StreamBuilder(
                     stream: LocationStream(),
                     builder: (context, snapshot) {
                       locationdetails = snapshot.data;
 
                       return Card(
-                        color: Color.fromARGB(255, 48, 47, 47),
+                        color: Colors.black,
                         child: Padding(
                           padding: const EdgeInsets.all(5),
                           child: Column(children: [
@@ -55,14 +47,16 @@ class placeOrderhere extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'shipping information',
+                                  'Shipping data',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                       fontSize: 22),
                                 ),
                                 GestureDetector(
-                                  onTap: () => Get.to(BookingLocation()),
+                                  onTap: () => Get.defaultDialog(
+                                      content:
+                                          Flexible(child: BookingLocation())),
                                   child: CircleAvatar(
                                     backgroundColor:
                                         Colors.white.withOpacity(.1),
@@ -78,7 +72,7 @@ class placeOrderhere extends StatelessWidget {
                             khieght,
                             Row(
                               children: [
-                                smalltextboldWidjetswhite(Title: 'Location'),
+                                smalltextboldWidjets(Title: 'Location'),
                               ],
                             ),
                             SizedBox(
@@ -93,6 +87,7 @@ class placeOrderhere extends StatelessWidget {
                                 ),
                                 kwidth,
                                 Container(
+                                  padding: EdgeInsets.only(left: 2.h),
                                   width: 250.w,
                                   child: Text(
                                       ' ${locationdetails == null ? 'place' : locationdetails?.place},${locationdetails == null ? 'city' : locationdetails?.city},pin:${locationdetails == null ? 'Enter Pin' : locationdetails?.pincode}, Mob: ${locationdetails == null ? 'Mobile no' : locationdetails?.mobileno}.',
@@ -110,12 +105,8 @@ class placeOrderhere extends StatelessWidget {
                     }),
                 khieght,
                 Row(
-                  children: [
-                    smalltextboldWidjets(
-                        Title: ' Select  your payment  Method  here')
-                  ],
+                  children: [smalltextboldWidjetsblack(Title: 'Just Pay It.')],
                 ),
-                khieght,
                 khieght,
                 khieght,
                 Padding(
@@ -132,7 +123,7 @@ class placeOrderhere extends StatelessWidget {
                               leading: Image.asset(
                                 'assets/accessories/unnamed.jpg',
                               ),
-                              title: PayText(data: 'Razorpaty'),
+                              title: PayText(data: 'Razorpay'),
                               trailing: radioButton(
                                 value: 1,
                                 onChange: (value) {
@@ -180,15 +171,6 @@ class placeOrderhere extends StatelessWidget {
           khieght,
           khieght,
           khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
-          khieght,
           StreamBuilder(
               stream: LocationStream(),
               builder: (context, snapshot) {
@@ -216,7 +198,8 @@ class placeOrderhere extends StatelessWidget {
                       color: Colors.black,
                       child: Card(
                         color: Colors.white,
-                        child: Center(child: Textwidgrt(title1: 'PLACE ORDER')),
+                        child: Center(
+                            child: Textwidgrtblack(title1: 'PLACE ORDER')),
                       ),
                     ),
                   ),

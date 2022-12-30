@@ -11,6 +11,21 @@ class CartHeading extends StatelessWidget {
     return Text(
       title1,
       style:
+          TextStyle(color: kwhite, fontSize: 30, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class CartHeadingbblack extends StatelessWidget {
+  CartHeadingbblack({Key? key, required this.title1}) : super(key: key);
+
+  String title1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title1,
+      style:
           TextStyle(color: kblack, fontSize: 30, fontWeight: FontWeight.bold),
     );
   }
@@ -49,8 +64,41 @@ class ItemListHeading extends StatelessWidget {
   }
 }
 
+class ItemListHeadingnewfont extends StatelessWidget {
+  ItemListHeadingnewfont({Key? key, required this.title1}) : super(key: key);
+
+  String title1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title1,
+      style: TextStyle(
+          color: kwhite,
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'abril fatface'),
+    );
+  }
+}
+
 class Textwidgrt extends StatelessWidget {
   Textwidgrt({Key? key, required this.title1}) : super(key: key);
+
+  String title1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title1,
+      style:
+          TextStyle(color: kwhite, fontSize: 20, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class Textwidgrtblack extends StatelessWidget {
+  Textwidgrtblack({Key? key, required this.title1}) : super(key: key);
 
   String title1;
 
@@ -74,9 +122,11 @@ class Textwidgrt1 extends StatelessWidget {
     return Text(
       title1,
       style: TextStyle(
-          color: Color.fromARGB(255, 168, 165, 165),
-          fontSize: 20,
-          fontWeight: FontWeight.bold),
+        color: Color.fromARGB(255, 168, 165, 165),
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
@@ -106,13 +156,15 @@ class smalltextboldWidjets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       Title,
-      style: TextStyle(fontWeight: FontWeight.bold),
+      style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 248, 245, 245)),
     );
   }
 }
 
-class smalltextboldWidjetswhite extends StatelessWidget {
-  smalltextboldWidjetswhite({
+class smalltextboldWidjetsblack extends StatelessWidget {
+  smalltextboldWidjetsblack({
     required this.Title,
     Key? key,
   }) : super(key: key);
@@ -122,7 +174,9 @@ class smalltextboldWidjetswhite extends StatelessWidget {
     return Text(
       Title,
       style: TextStyle(
-          fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 8, 8, 8),
+          fontSize: 17),
     );
   }
 }
@@ -152,8 +206,11 @@ class smalltextboldWidjets25 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       Title,
-      style:
-          TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: kwhite),
+      style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: kwhite,
+          overflow: TextOverflow.ellipsis),
     );
   }
 }
@@ -169,7 +226,7 @@ class smalltextboldWidjets25black extends StatelessWidget {
     return Text(
       Title,
       style:
-          TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: kblack),
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: kwhite),
     );
   }
 }

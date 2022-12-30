@@ -18,8 +18,10 @@ addingTofav(ModelProduct productdetail) async {
   final addingtofirebase = FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
-      .collection(email!)
-      .doc('userdetails')
+      .collection('users')
+      .doc(email!)
+      .collection('userdetails')
+      .doc('favlist')
       .collection('favlist')
       .doc();
   favitem.id = addingtofirebase.id;
@@ -37,8 +39,10 @@ deleteFromFav(id) async {
   return await FirebaseFirestore.instance
       .collection('collection')
       .doc('users')
-      .collection(email!)
-      .doc('userdetails')
+      .collection('users')
+      .doc(email!)
+      .collection('userdetails')
+      .doc('favlist')
       .collection('favlist')
       .doc(id)
       .delete();
