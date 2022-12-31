@@ -180,6 +180,7 @@ class placeOrderhere extends StatelessWidget {
                     if (locatiodetails != null) {
                       if (placeordercontroller.basevaleu.value == 1) {
                         openCheckout(total: total);
+                        Get.to(Order());
                       } else {
                         Addingtoorderlist();
 

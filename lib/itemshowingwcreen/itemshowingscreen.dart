@@ -96,26 +96,33 @@ class ItemShowingScreen extends StatelessWidget {
                         ),
                       ),
                       khieght,
-                      khieght,
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                TextOnly5(
-                                  title1: itemdetail == null
-                                      ? 'oops'
-                                      : ' ${itemdetail.name}',
+                                SizedBox(
+                                  width: 300.w,
+                                  child: TextItemShowName(
+                                    title1: itemdetail == null
+                                        ? 'oops'
+                                        : ' ${itemdetail.name}',
+                                  ),
                                 ),
+                              ],
+                            ),
+                            khieght,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
                                 PcCard(
                                     title: itemdetail == null
                                         ? 'oops'
                                         : itemdetail.price.toString()),
                               ],
                             ),
-                            khieght,
                             khieght,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,12 +131,14 @@ class ItemShowingScreen extends StatelessWidget {
                                     title: itemdetail == null
                                         ? '100'
                                         : 'min ${itemdetail.minno.toString()} ps'),
-                                CardAddCart(
-                                  title: "add to cart",
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: CardAddCart(
+                                    title: "add to cart",
+                                  ),
                                 ),
                               ],
                             ),
-                            khieght,
                             khieght,
                             khieght,
                             Column(

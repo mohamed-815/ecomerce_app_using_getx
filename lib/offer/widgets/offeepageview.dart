@@ -94,7 +94,7 @@ class OfferItemNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromRGBO(255, 255, 255, 1).withOpacity(.1),
+      color: Color.fromARGB(255, 21, 20, 20).withOpacity(.3),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Textwidgrt1(

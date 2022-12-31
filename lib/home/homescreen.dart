@@ -71,6 +71,8 @@ class HomeScreen extends StatelessWidget {
                                 Animation animation,
                                 Animation secondaryAnimation) {
                               return ShowDialogeshow(
+                                data:
+                                    'https://icon-library.com/images/gif-icon/gif-icon-2.jpg',
                                 item: const Settings1(),
                               );
                             });
@@ -96,6 +98,8 @@ class HomeScreen extends StatelessWidget {
                                 Animation animation,
                                 Animation secondaryAnimation) {
                               return ShowDialogeshow(
+                                data:
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbGrm3C3QgWyL0mk3GbQ6JC36t_w1G9VzAww&usqp=CAU',
                                 item: Search(),
                               );
                             });

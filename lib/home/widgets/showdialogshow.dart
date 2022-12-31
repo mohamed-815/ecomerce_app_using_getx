@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ShowDialogeshow extends StatelessWidget {
   ShowDialogeshow({
+    required this.data,
     required this.item,
     Key? key,
   }) : super(key: key);
   Widget item;
+  String data;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -24,11 +26,10 @@ class ShowDialogeshow extends StatelessWidget {
           ),
           Positioned(
               top: 33.h,
-              left: 109.w,
-              child: const CircleAvatar(
+              left: 114.w,
+              child: CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbGrm3C3QgWyL0mk3GbQ6JC36t_w1G9VzAww&usqp=CAU'),
+                backgroundImage: NetworkImage(data),
               ))
         ],
       ),

@@ -39,104 +39,109 @@ class ListingItemPage1 extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
         ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  backbutton1(),
-                  GestureDetector(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white.withOpacity(.3),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.black,
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    backbutton1(),
+                    GestureDetector(
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white.withOpacity(.3),
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      ItemListHeading(title1: titlelarge),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      StreamBuilder(
-                          stream: itemdtail,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Text('Error Found');
-                            }
-                            if (snapshot.hasData) {
-                              final list = snapshot.data!;
-                              return Text(
-                                '${list.length} Prodects found',
-                                style: TextStyle(color: Colors.white),
-                              );
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-                          }),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            StreamBuilder(
-                stream: itemdtail,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text('some thing went wrong');
-                  }
-
-                  if (snapshot.hasData) {
-                    final showingitems = snapshot.data!;
-                    return showingitems.isNotEmpty
-                        ? Expanded(
-                            child: StaggeredGrid.count(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              children:
-                                  List.generate(showingitems.length, (index) {
-                                final item = showingitems[index];
-
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(ItemShowingScreen(itemdetail: item));
-                                  },
-                                  child: StaggeredItem(
-                                    isfromtotal: 'yes',
-                                    item: item,
-                                    shieght: shieght,
-                                    swidth: swidth,
-                                    index: index,
-                                  ),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        ItemListHeading(title1: titlelarge),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        StreamBuilder(
+                            stream: itemdtail,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Error Found');
+                              }
+                              if (snapshot.hasData) {
+                                final list = snapshot.data!;
+                                return Text(
+                                  '${list.length} Prodects found',
+                                  style: TextStyle(color: Colors.white),
                                 );
-                              }),
-                            ),
-                          )
-                        : Expanded(
-                            child: Center(
-                                child: CartHeading(
-                            title1: 'Nothing Found',
-                          )));
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                }),
-          ],
+                              } else {
+                                return CircularProgressIndicator();
+                              }
+                            }),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              StreamBuilder(
+                  stream: itemdtail,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('some thing went wrong');
+                    }
+
+                    if (snapshot.hasData) {
+                      final showingitems = snapshot.data!;
+                      return showingitems.isNotEmpty
+                          ? Container(
+                              child: StaggeredGrid.count(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing: 20,
+                                children:
+                                    List.generate(showingitems.length, (index) {
+                                  final item = showingitems[index];
+
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          ItemShowingScreen(itemdetail: item));
+                                    },
+                                    child: StaggeredItem(
+                                      isfromtotal: 'yes',
+                                      item: item,
+                                      shieght: shieght,
+                                      swidth: swidth,
+                                      index: index,
+                                    ),
+                                  );
+                                }),
+                              ),
+                            )
+                          : Container(
+                              height: 400.h,
+                              child: Center(
+                                  child: CartHeading(
+                                title1: 'Nothing Found',
+                              )),
+                            );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            ],
+          ),
         ),
       ],
     ));

@@ -10,8 +10,8 @@ class CartHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title1,
-      style:
-          TextStyle(color: kwhite, fontSize: 30, fontWeight: FontWeight.bold),
+      style: const TextStyle(
+          color: kwhite, fontSize: 30, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -40,6 +40,7 @@ class CartHeading1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title1,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: kwhite,
         fontSize: 30,
@@ -225,8 +226,11 @@ class smalltextboldWidjets25black extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       Title,
-      style:
-          TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: kwhite),
+      style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: kwhite,
+          overflow: TextOverflow.ellipsis),
     );
   }
 }
@@ -257,6 +261,27 @@ class TextOnly5 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title1,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 4,
+      style: TextStyle(
+        color: Color.fromARGB(255, 237, 234, 234),
+        fontSize: 25,
+      ),
+    );
+  }
+}
+
+class TextItemShowName extends StatelessWidget {
+  TextItemShowName({Key? key, required this.title1}) : super(key: key);
+
+  String title1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title1,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 4,
       style: TextStyle(
         color: Color.fromARGB(255, 237, 234, 234),
         fontSize: 25,

@@ -74,7 +74,10 @@ class StaggeredItem extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                smalltextboldWidjets25black(Title: item.name),
+                                SizedBox(
+                                    width: 150.w,
+                                    child: smalltextboldWidjets25black(
+                                        Title: item.name)),
                               ],
                             ),
                             Row(

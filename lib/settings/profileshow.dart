@@ -17,7 +17,7 @@ class ProfileShow extends StatelessWidget {
         stream: ProfileStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text('Some Thing Went wrong');
+            return Text('Pls Add Profile Details.');
           }
           if (snapshot.hasData) {
             final profiledetail = snapshot.data;

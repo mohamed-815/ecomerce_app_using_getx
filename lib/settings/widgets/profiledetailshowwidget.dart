@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:orands_fish_booking/authcontroller.dart';
 import 'package:orands_fish_booking/const/const.dart';
@@ -36,7 +37,12 @@ Row AddingProfileDetail(ProfileDetail? profiledetail) {
                 : profiledetail!.name.toString(),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
           ),
-          Text(email!)
+          SizedBox(
+              width: 170.w,
+              child: Text(
+                email!,
+                overflow: TextOverflow.ellipsis,
+              ))
         ],
       ),
     ],
