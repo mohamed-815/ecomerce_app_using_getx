@@ -8,6 +8,8 @@ import 'package:orands_fish_booking/cart/locationdetails/bookinglocation.dart';
 import 'package:orands_fish_booking/cart/cart.dart';
 
 import 'package:orands_fish_booking/cart/placeordercontroller.dart';
+import 'package:orands_fish_booking/cart/widgets/paytile.dart';
+import 'package:orands_fish_booking/cart/widgets/radio.dart';
 import 'package:orands_fish_booking/const/const.dart';
 import 'package:orands_fish_booking/model/cart,ordermodels/locationmodel.dart';
 import 'package:orands_fish_booking/orderpage.dart';
@@ -46,7 +48,7 @@ class placeOrderhere extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Shipping data',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -81,7 +83,7 @@ class placeOrderhere extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.location_on,
                                   color: Colors.white,
                                 ),
@@ -92,7 +94,7 @@ class placeOrderhere extends StatelessWidget {
                                   child: Text(
                                       ' ${locationdetails == null ? 'place' : locationdetails?.place},${locationdetails == null ? 'city' : locationdetails?.city},pin:${locationdetails == null ? 'Enter Pin' : locationdetails?.pincode}, Mob: ${locationdetails == null ? 'Mobile no' : locationdetails?.mobileno}.',
                                       maxLines: 5,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                           fontSize: 20)),
@@ -145,21 +147,10 @@ class placeOrderhere extends StatelessWidget {
                       child: GetBuilder<PlaceOrderController>(
                           init: PlaceOrderController(),
                           builder: (c) {
-                            return ListTile(
-                                leading: Image.asset(
-                                  'assets/accessories/download.jpg',
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: PayText(
-                                  data: 'Cash On Delivey',
-                                ),
-                                trailing: radioButton(
-                                  value: 2,
-                                  onChange: (value) {
-                                    c.changingvaleu(value!);
-                                  },
-                                ));
+                            return Razortile(
+                                c: c,
+                                image1: 'assets/accessories/download.jpg',
+                                text1: 'Cash On Delivey');
                           }),
                     ),
                   ),
@@ -167,10 +158,7 @@ class placeOrderhere extends StatelessWidget {
               ],
             ),
           ),
-          khieght,
-          khieght,
-          khieght,
-          khieght,
+          Khieght4(),
           StreamBuilder(
               stream: LocationStream(),
               builder: (context, snapshot) {
@@ -209,46 +197,5 @@ class placeOrderhere extends StatelessWidget {
         ],
       )),
     );
-  }
-}
-
-class PayText extends StatelessWidget {
-  PayText({
-    required this.data,
-    Key? key,
-  }) : super(key: key);
-  String data;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      data,
-      style: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white),
-    );
-  }
-}
-
-class radioButton extends StatelessWidget {
-  radioButton({
-    Key? key,
-    required this.value,
-    required this.onChange,
-  }) : super(key: key);
-  int value;
-  void Function(int?)? onChange;
-  @override
-  Widget build(BuildContext context) {
-    return GetX<PlaceOrderController>(
-        init: PlaceOrderController(),
-        builder: (c) {
-          return Radio(
-              focusColor: Colors.grey,
-              hoverColor: Colors.grey,
-              fillColor:
-                  MaterialStateColor.resolveWith((states) => Colors.white),
-              value: value,
-              groupValue: c.basevaleu.value,
-              onChanged: onChange);
-        });
   }
 }

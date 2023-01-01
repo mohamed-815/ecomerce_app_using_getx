@@ -32,3 +32,39 @@ final khieght8 = SizedBox(
 // 10
       8.h,
 );
+
+class Khieght4 extends StatelessWidget {
+  const Khieght4({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        khieght,
+        khieght,
+        khieght,
+        khieght,
+      ],
+    );
+  }
+}
+
+class Kwidth4 extends StatelessWidget {
+  const Kwidth4({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        kwidth,
+        kwidth,
+        kwidth,
+        kwidth,
+      ],
+    );
+  }
+}

@@ -132,7 +132,11 @@ class ItemShowingScreen extends StatelessWidget {
                                         ? '100'
                                         : 'min ${itemdetail.minno.toString()} ps'),
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    addingToCart(itemdetail);
+                                    Get.snackbar('Cart', 'Added to cart');
+                                    Get.to(CartPage());
+                                  },
                                   child: CardAddCart(
                                     title: "add to cart",
                                   ),
