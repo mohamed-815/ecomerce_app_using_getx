@@ -27,6 +27,13 @@ final kwidth = SizedBox(
 // 10
       8.w,
 );
+
+final kwidth4 = SizedBox(
+  width:
+// 10
+      32.w,
+);
+
 final khieght8 = SizedBox(
   height:
 // 10
@@ -46,24 +53,6 @@ class Khieght4 extends StatelessWidget {
         khieght,
         khieght,
         khieght,
-      ],
-    );
-  }
-}
-
-class Kwidth4 extends StatelessWidget {
-  const Kwidth4({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        kwidth,
-        kwidth,
-        kwidth,
-        kwidth,
       ],
     );
   }

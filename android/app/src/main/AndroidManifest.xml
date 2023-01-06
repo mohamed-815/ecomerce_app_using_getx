@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.orands_fish_booking">
+    package="com.booking.orands_fish_booking">
+   <uses-permission android:name="android.permission.INTERNET" /> 
    <application
         android:label="Oranda Pets"
         android:name="${applicationName}"
